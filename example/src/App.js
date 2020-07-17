@@ -8,6 +8,24 @@ const App = () => {
       title="AzaChii"
       position="fixed"
       shadow="onScroll"
+      items={[
+        {
+          label: 'Verificador de placas',
+          href: '/plate-checker'
+        },
+        {
+          label: 'Noticias'
+        },
+        {
+          label: 'BLog'
+        },
+        {
+          label: 'Ingresar',
+          button: {
+            background: 'blue'
+          }
+        }
+      ]}
     />
     <div style={{height: '100vh'}} />
     <div style={{height: '100vh'}} />

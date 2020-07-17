@@ -9,13 +9,14 @@ import PropTypes from 'prop-types'
  * @param children The content of the component
  * @param href The href a property
  * @param className The className to stylish the component
+ * @param style The styles object
  * */
-export default function LinkComponent({ children, href, className }) {
+export default function LinkComponent({ children, href, className, style }) {
   const { Link, library } = useContext(SimpleUIContext)
 
   if (Link === undefined) {
     return (
-      <a href={href} className={className}>
+      <a href={href} className={className} style={style}>
         {children}
       </a>
     )
@@ -24,7 +25,7 @@ export default function LinkComponent({ children, href, className }) {
     case 'nextjs':
       return (
         <Link href={href}>
-          <a className={className}>{children}</a>
+          <a className={className} style={style}>{children}</a>
         </Link>
       )
     default:
@@ -37,11 +38,13 @@ export default function LinkComponent({ children, href, className }) {
 }
 
 LinkComponent.defaultProps = {
-  className: undefined
+  className: undefined,
+  style: undefined
 }
 
 LinkComponent.propTypes = {
   children: PropTypes.node.isRequired,
   href: PropTypes.string.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  style: PropTypes.object
 }

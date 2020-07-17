@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from '../Link'
+import Item from './Item'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
@@ -80,19 +81,13 @@ export default function Header({
             background.onScroll.type === 'translucent'
         : background
   })
-  const titleClass = classNames(
-    {
-      'font-bold': true,
-      'text-xl': !scrolled,
-      'text-lg': scrolled,
-      'py-3': items.length < 1 && !scrolled,
-      'py-2': items.length < 1 && scrolled
-    },
-    typeof title === 'object' &&
-      title.className && {
-        [title.className]: true
-      }
-  )
+  const titleClass = classNames({
+    'font-bold inline-block': true,
+    'text-xl': !scrolled,
+    'text-lg': scrolled,
+    'py-3': items.length < 1 && !scrolled,
+    'py-2': items.length < 1 && scrolled
+  })
 
   return (
     <header
@@ -112,7 +107,7 @@ export default function Header({
       }
     >
       <div className='col-start-2 col-span-10'>
-        <div className='grid'>
+        <div className='grid items-center'>
           <div className='col-start-1'>
             {typeof title === 'function' ? (
               title({ scrolled, className: titleClass })
@@ -124,18 +119,41 @@ export default function Header({
                     color && {
                       color:
                         typeof color === 'object'
-                          ? color.initial &&
-                            (!scrolled || color.onScroll === undefined)
+                          ? typeof color.title === 'object'
+                            ? color.title.initial &&
+                              (!scrolled || color.title.onScroll === undefined)
+                              ? color.title.initial
+                              : color.title.onScroll &&
+                                scrolled &&
+                                color.title.onScroll
+                            : color.title
+                            ? color.title
+                            : color.initial &&
+                              (!scrolled || color.onScroll === undefined)
                             ? color.initial
                             : color.onScroll && scrolled && color.onScroll
                           : color
                     }
                   }
                 >
-                  {typeof title === 'object' ? title.text : title}
+                  {title}
                 </h2>
               </Link>
             )}
+          </div>
+          <div className='col-end-12' style={{ justifySelf: 'flex-end' }}>
+            <div className='hidden md:grid md:grid-flow-col md:col-gap-10 lg:col-gap-12'>
+              {items.map((item, index) => (
+                <Item
+                  {...item}
+                  scrolled={scrolled}
+                  key={index}
+                  color={
+                    typeof color === 'object' && color.item ? color.item : color
+                  }
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -156,11 +174,7 @@ Header.propTypes = {
   position: PropTypes.oneOf(['relative', 'fixed', 'absolute']),
   title: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.func,
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      className: PropTypes.string
-    })
+    PropTypes.func
   ]),
   shadow: PropTypes.oneOfType([
     PropTypes.bool,
@@ -187,8 +201,20 @@ Header.propTypes = {
     PropTypes.string,
     PropTypes.oneOf([
       PropTypes.shape({
-        initial: PropTypes.string,
-        onScroll: PropTypes.string
+        title: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.shape({
+            initial: PropTypes.string,
+            onScroll: PropTypes.string
+          })
+        ]),
+        item: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.shape({
+            initial: PropTypes.string,
+            onScroll: PropTypes.string
+          })
+        ])
       })
     ])
   ]),
@@ -196,7 +222,7 @@ Header.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       href: PropTypes.string,
-      action: PropTypes.func
+      onClick: PropTypes.func
     })
   )
 }
