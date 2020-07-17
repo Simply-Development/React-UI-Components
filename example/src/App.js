@@ -1,10 +1,17 @@
 import React from 'react'
-
-import { ExampleComponent } from 'simple-react-ui-components'
-import 'simple-react-ui-components/dist/index.css'
+import { Header, SimpleUIProvider } from 'simple-react-ui-components'
+import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <SimpleUIProvider>
+    <Header
+      title="AzaChii"
+      position="fixed"
+      shadow="onScroll"
+    />
+    <div style={{height: '100vh'}} />
+    <div style={{height: '100vh'}} />
+  </SimpleUIProvider>
 }
 
 export default App

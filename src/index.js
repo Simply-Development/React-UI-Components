@@ -1,6 +1,5 @@
-import React from 'react'
-import styles from './styles.module.css'
+import SimpleUIContext, { SimpleUIProvider } from './contexts/SimpleUIContext'
+import Header from './components/Header'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export default SimpleUIContext
+export { SimpleUIProvider, Header }

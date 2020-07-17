@@ -6,25 +6,29 @@
 
 ## Install
 
+This library needs the tailwindcss stylesheet to work
+
 ```bash
-npm install --save simple-react-ui-components
+npm install --save simple-react-ui-components tailwindcss
 ```
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react'
+We need to wrap our App into SimpleUIProvider to config some thinigs as the Link component that we're going to use to move around our application.
 
-import MyComponent from 'simple-react-ui-components'
-import 'simple-react-ui-components/dist/index.css'
+```js
+import { SimpleUIProvider } from 'simple-react-ui-components'
+import 'tailwindcss/dist/tailwind.min.css';
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+export default function App() {
+  return (
+    <SimpleUIProvider>
+      <MyApp />
+    </SimpleUIProvider>
+  )
 }
 ```
 
 ## License
 
-MIT © [Schorts99](https://github.com/Schorts99)
+MIT © [schorts99](https://github.com/Schorts99)
