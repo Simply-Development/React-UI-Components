@@ -4,6 +4,8 @@ import Item from './Item'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
+// TODO: Add SidebarButton
+
 /**
  * Header component with shadow on scroll and tabs with sub tabs
  *
@@ -17,6 +19,8 @@ import PropTypes from 'prop-types'
  * @param color A string or object with the color of the texts when page have been
  * scrolled and when not
  * @param items An array of objects with the data of the tabs to render
+ * @param sidebarButton A bool value, function or node to determine if the
+ * sidebar button is shown
  * */
 export default function Header({
   position,
@@ -24,6 +28,7 @@ export default function Header({
   shadow,
   background,
   color,
+  sidebarButton,
   items
 }) {
   const [scrolled, setScrolled] = useState(false)
@@ -35,7 +40,11 @@ export default function Header({
   useEffect(() => {
     if (
       (typeof shadow === 'string' && shadow === 'onScroll') ||
-      (typeof background === 'object' && background.onScroll)
+      (typeof background === 'object' && background.onScroll) ||
+      (typeof color === 'object' &&
+        (color.onScroll ||
+          (typeof color.title === 'object' && color.title.onScroll) ||
+          (typeof color.item === 'object' && color.item.onScroll)))
     ) {
       window.addEventListener(
         'scroll',
@@ -85,8 +94,10 @@ export default function Header({
     'font-bold inline-block': true,
     'text-xl': !scrolled,
     'text-lg': scrolled,
-    'py-3': items.length < 1 && !scrolled,
-    'py-2': items.length < 1 && scrolled
+    'md:py-3': items.length < 1 && !scrolled,
+    'md:py-2': items.length < 1 && scrolled,
+    'py-2': !sidebarButton && !scrolled,
+    'py-1': !sidebarButton && scrolled
   })
 
   return (
@@ -167,15 +178,13 @@ Header.defaultProps = {
   shadow: false,
   background: undefined,
   color: undefined,
-  items: []
+  items: [],
+  sidebarButton: false
 }
 
 Header.propTypes = {
   position: PropTypes.oneOf(['relative', 'fixed', 'absolute']),
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func
-  ]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   shadow: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.oneOf(['onScroll', 'always'])
@@ -224,5 +233,10 @@ Header.propTypes = {
       href: PropTypes.string,
       onClick: PropTypes.func
     })
-  )
+  ),
+  sidebarButton: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.func,
+    PropTypes.node
+  ])
 }
