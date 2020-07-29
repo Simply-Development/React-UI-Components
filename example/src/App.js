@@ -1,9 +1,9 @@
 import React from 'react'
-import { Header, SimpleUIProvider } from 'simple-react-ui-components'
+import { Header, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
-  return <SimpleUIProvider>
+  return <SimplyUIProvider>
     <Header
       title="Domit Express"
       items={[
@@ -11,6 +11,10 @@ const App = () => {
           label: 'Ingresar',
           button: {
             rounded: true,
+            color: {
+              initial: 'red',
+              onScroll: 'blue'
+            }
           },
         }
       ]}
@@ -21,7 +25,7 @@ const App = () => {
     />
     <div style={{height: '100vh'}} />
     <div style={{height: '100vh'}} />
-  </SimpleUIProvider>
+  </SimplyUIProvider>
 }
 
 export default App

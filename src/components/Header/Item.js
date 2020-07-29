@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
  * @param onClick Function
  * @param scrolled To set padding size
  * @param color Item text color
+ * @param button Config for Item to look like button
  * */
 export default function HeaderItem({
   label,
@@ -56,8 +57,23 @@ export default function HeaderItem({
           <span
             className={buttonClass}
             style={{
-              backgroundColor: typeof button === 'object' && button.background,
-              color: typeof button === 'object' && button.color
+              backgroundColor:
+                typeof button === 'object' &&
+                typeof button.background === 'object'
+                  ? button.background.initial &&
+                    (!scrolled || button.background.onScroll === undefined)
+                    ? button.background.initial
+                    : button.background.onScroll &&
+                      scrolled &&
+                      button.background.onScroll
+                  : button.background,
+              color:
+                typeof button === 'object' && typeof button.color === 'object'
+                  ? button.color.initial &&
+                    (!scrolled || button.color.onScroll === undefined)
+                    ? button.color.initial
+                    : button.color.onScroll && scrolled && button.color.onScroll
+                  : button.color
             }}
           >
             {label}
@@ -87,8 +103,23 @@ export default function HeaderItem({
         <span
           className={buttonClass}
           style={{
-            backgroundColor: typeof button === 'object' && button.background,
-            color: typeof button === 'object' && button.color
+            backgroundColor:
+              typeof button === 'object' &&
+              typeof button.background === 'object'
+                ? button.background.initial &&
+                  (!scrolled || button.background.onScroll === undefined)
+                  ? button.background.initial
+                  : button.background.onScroll &&
+                    scrolled &&
+                    button.background.onScroll
+                : button.background,
+            color:
+              typeof button === 'object' && typeof button.color === 'object'
+                ? button.color.initial &&
+                  (!scrolled || button.color.onScroll === undefined)
+                  ? button.color.initial
+                  : button.color.onScroll && scrolled && button.color.onScroll
+                : button.color
           }}
         >
           {label}

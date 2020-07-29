@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import SimpleUIContext from '../../contexts/SimpleUIContext'
+import SimplyUIContext from '../../contexts/SimplyUIContext'
 import PropTypes from 'prop-types'
 
 /**
@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
  * @param style The styles object
  * */
 export default function LinkComponent({ children, href, className, style }) {
-  const { Link, library } = useContext(SimpleUIContext)
+  const { Link, library } = useContext(SimplyUIContext)
 
   if (Link === undefined) {
     return (

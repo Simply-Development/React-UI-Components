@@ -1,5 +1,5 @@
-import SimpleUIContext, { SimpleUIProvider } from './contexts/SimpleUIContext'
+import SimplyUIContext, { SimplyUIProvider } from './contexts/SimplyUIContext'
 import Header from './components/Header'
 
-export default SimpleUIContext
-export { SimpleUIProvider, Header }
+export default SimplyUIContext
+export { SimplyUIProvider, Header }
