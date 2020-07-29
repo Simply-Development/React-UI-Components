@@ -38,7 +38,7 @@ export default function HeaderItem({
     return (
       <Link
         href={href}
-        className={!button && itemClass}
+        className={itemClass}
         style={
           color &&
           !button && {
@@ -47,7 +47,8 @@ export default function HeaderItem({
                 ? color.initial && (!scrolled || color.onScroll === undefined)
                   ? color.initial
                   : color.onScroll && scrolled && color.onScroll
-                : color
+                : color,
+            alignSelf: button && 'center'
           }
         }
       >
@@ -71,7 +72,7 @@ export default function HeaderItem({
   return (
     <p
       onClick={onClick}
-      className={`${button ? scrolled && 'py-2' : itemClass}`}
+      className={itemClass}
       style={{
         color:
           !button && typeof color === 'object'
@@ -143,5 +144,5 @@ HeaderItem.propTypes = {
         })
       ])
     })
-  ]),
+  ])
 }

@@ -35,8 +35,8 @@ export default function Header({
   const [scrolled, setScrolled] = useState(false)
 
   /**
-   * Add scroll listener to add shadow on user scroll if shadow
-   * prop = 'onScroll' or background has onScroll property
+   * Add scroll listener to add shadow on user scroll if any prop includes
+   * 'onScroll'
    * */
   useEffect(() => {
     if (

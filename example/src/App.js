@@ -12,9 +12,6 @@ const App = () => {
           button: {
             rounded: true,
           },
-        },
-        {
-          label: 'putas'
         }
       ]}
       position="fixed"
