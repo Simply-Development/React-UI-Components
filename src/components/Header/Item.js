@@ -71,7 +71,7 @@ export default function HeaderItem({
   return (
     <p
       onClick={onClick}
-      className={!button && itemClass}
+      className={`${button ? scrolled && 'py-2' : itemClass}`}
       style={{
         color:
           !button && typeof color === 'object'
@@ -131,5 +131,17 @@ HeaderItem.propTypes = {
       })
     ])
   ]),
-  button: PropTypes.bool
+  button: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      rounded: PropTypes.bool,
+      background: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          initial: PropTypes.string,
+          onScroll: PropTypes.string
+        })
+      ])
+    })
+  ]),
 }

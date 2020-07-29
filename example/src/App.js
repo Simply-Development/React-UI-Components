@@ -5,27 +5,22 @@ import 'tailwindcss/dist/tailwind.min.css';
 const App = () => {
   return <SimpleUIProvider>
     <Header
-      title="AzaChii"
-      position="fixed"
-      shadow="onScroll"
+      title="Domit Express"
       items={[
-        {
-          label: 'Verificador de placas',
-          href: '/plate-checker'
-        },
-        {
-          label: 'Noticias'
-        },
-        {
-          label: 'BLog'
-        },
         {
           label: 'Ingresar',
           button: {
-            background: 'blue'
-          }
+            rounded: true,
+          },
+        },
+        {
+          label: 'putas'
         }
       ]}
+      position="fixed"
+      shadow="onScroll"
+      background="white"
+      hideItemsOnSmallDevices={false}
     />
     <div style={{height: '100vh'}} />
     <div style={{height: '100vh'}} />

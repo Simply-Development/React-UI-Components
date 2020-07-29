@@ -29,7 +29,8 @@ export default function Header({
   background,
   color,
   sidebarButton,
-  items
+  items,
+  hideItemsOnSmallDevices
 }) {
   const [scrolled, setScrolled] = useState(false)
 
@@ -96,8 +97,12 @@ export default function Header({
     'text-lg': scrolled,
     'md:py-3': items.length < 1 && !scrolled,
     'md:py-2': items.length < 1 && scrolled,
-    'py-2': !sidebarButton && !scrolled,
-    'py-1': !sidebarButton && scrolled
+    'py-2': !sidebarButton && hideItemsOnSmallDevices && !scrolled,
+    'py-1': !sidebarButton && hideItemsOnSmallDevices && scrolled
+  })
+  const headerItemsClass = classNames({
+    'hidden md:grid md:grid-flow-col md:col-gap-10 lg:col-gap-12': hideItemsOnSmallDevices,
+    'grid grid-flow-col col-gap-8 sm:col-gap-10 lg:col-gap-12': !hideItemsOnSmallDevices
   })
 
   return (
@@ -153,7 +158,7 @@ export default function Header({
             )}
           </div>
           <div className='col-end-12' style={{ justifySelf: 'flex-end' }}>
-            <div className='hidden md:grid md:grid-flow-col md:col-gap-10 lg:col-gap-12'>
+            <div className={headerItemsClass}>
               {items.map((item, index) => (
                 <Item
                   {...item}
@@ -179,7 +184,8 @@ Header.defaultProps = {
   background: undefined,
   color: undefined,
   items: [],
-  sidebarButton: false
+  sidebarButton: false,
+  hideItemsOnSmallDevices: true
 }
 
 Header.propTypes = {
@@ -231,12 +237,26 @@ Header.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       href: PropTypes.string,
-      onClick: PropTypes.func
+      onClick: PropTypes.func,
+      button: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+          rounded: PropTypes.bool,
+          background: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+              initial: PropTypes.string,
+              onScroll: PropTypes.string
+            })
+          ])
+        })
+      ])
     })
   ),
   sidebarButton: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.func,
     PropTypes.node
-  ])
+  ]),
+  hideItemsOnSmallDevices: PropTypes.bool
 }
