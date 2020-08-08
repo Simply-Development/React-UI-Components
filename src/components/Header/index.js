@@ -1,10 +1,27 @@
+/*
+ *   Copyright (c) 2020 Jorge Castillo
+ *   All rights reserved.
+
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+
+ *   http://www.apache.org/licenses/LICENSE-2.0
+
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 import React, { useEffect, useState } from 'react'
 import Link from '../Link'
 import Item from './Item'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-
-// TODO: Add SidebarButton
+import { getAccordingScrollValue } from '../../lib/scroll'
+import HamburgerMenu from 'react-hamburger-menu'
 
 /**
  * Header component with shadow on scroll and tabs with sub tabs
@@ -33,6 +50,7 @@ export default function Header({
   hideItemsOnSmallDevices
 }) {
   const [scrolled, setScrolled] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   /**
    * Add scroll listener to add shadow on user scroll if any prop includes
@@ -63,7 +81,11 @@ export default function Header({
     return () => {
       if (
         (typeof shadow === 'string' && shadow === 'onScroll') ||
-        (typeof background === 'object' && background.onScroll)
+        (typeof background === 'object' && background.onScroll) ||
+        (typeof color === 'object' &&
+          (color.onScroll ||
+            (typeof color.title === 'object' && color.title.onScroll) ||
+            (typeof color.item === 'object' && color.item.onScroll)))
       ) {
         window.removeEventListener('scroll', null)
       }
@@ -100,9 +122,13 @@ export default function Header({
     'py-2': !sidebarButton && hideItemsOnSmallDevices && !scrolled,
     'py-1': !sidebarButton && hideItemsOnSmallDevices && scrolled
   })
-  const headerItemsClass = classNames({
-    'hidden md:grid md:grid-flow-col md:col-gap-10 lg:col-gap-12': hideItemsOnSmallDevices,
-    'grid grid-flow-col col-gap-8 sm:col-gap-10 lg:col-gap-12': !hideItemsOnSmallDevices
+  const sidebarButtonClass = classNames({
+    'my-3': !scrolled,
+    'my-2': scrolled,
+    'md:hidden':
+      typeof sidebarButton === 'string' && sidebarButton === 'onlySmall',
+    'hidden md:block':
+      typeof sidebarButton === 'string' && sidebarButton === 'onlyBig'
   })
 
   return (
@@ -110,15 +136,7 @@ export default function Header({
       className={headerClass}
       style={
         background && {
-          backgroundColor:
-            typeof background === 'object'
-              ? background.color
-                ? background.color
-                : background.initial &&
-                  (!scrolled || background.onScroll === undefined)
-                ? background.initial.color
-                : background.onScroll && scrolled && background.onScroll.color
-              : background
+          backgroundColor: getAccordingScrollValue(background, scrolled)
         }
       }
     >
@@ -126,7 +144,7 @@ export default function Header({
         <div className='grid items-center'>
           <div className='col-start-1'>
             {typeof title === 'function' ? (
-              title({ scrolled, className: titleClass })
+              title({ scrolled })
             ) : (
               <Link href='/'>
                 <h2
@@ -135,19 +153,10 @@ export default function Header({
                     color && {
                       color:
                         typeof color === 'object'
-                          ? typeof color.title === 'object'
-                            ? color.title.initial &&
-                              (!scrolled || color.title.onScroll === undefined)
-                              ? color.title.initial
-                              : color.title.onScroll &&
-                                scrolled &&
-                                color.title.onScroll
-                            : color.title
-                            ? color.title
-                            : color.initial &&
-                              (!scrolled || color.onScroll === undefined)
-                            ? color.initial
-                            : color.onScroll && scrolled && color.onScroll
+                          ? getAccordingScrollValue(
+                              color.title || color,
+                              scrolled
+                            )
                           : color
                     }
                   }
@@ -158,9 +167,10 @@ export default function Header({
             )}
           </div>
           <div className='col-end-12' style={{ justifySelf: 'flex-end' }}>
-            <div className={headerItemsClass}>
+            <div className='grid grid-flow-col col-gap-10 lg:col-gap-12 items-center'>
               {items.map((item, index) => (
                 <Item
+                  hideOnSmallDevice={hideItemsOnSmallDevices}
                   {...item}
                   scrolled={scrolled}
                   key={index}
@@ -169,6 +179,26 @@ export default function Header({
                   }
                 />
               ))}
+              {sidebarButton &&
+                (typeof sidebarButton === 'function' ? (
+                  sidebarButton({ isSidebarOpen, setIsSidebarOpen, scrolled })
+                ) : (
+                  <HamburgerMenu
+                    isOpen={isSidebarOpen}
+                    menuClicked={() => setIsSidebarOpen(!isSidebarOpen)}
+                    width={27}
+                    height={17}
+                    strokeWidth={2}
+                    className={sidebarButtonClass}
+                    rotate={0}
+                    color={getAccordingScrollValue(
+                      color.item || color,
+                      scrolled
+                    )}
+                    borderRadius={0}
+                    animationDuration={0.5}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -256,7 +286,7 @@ Header.propTypes = {
   sidebarButton: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.func,
-    PropTypes.node
+    PropTypes.oneOf(['onlySmall', 'onlyBig'])
   ]),
   hideItemsOnSmallDevices: PropTypes.bool
 }

@@ -1,7 +1,25 @@
+/*
+ *   Copyright (c) 2020 Jorge Castillo
+ *   All rights reserved.
+
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+
+ *   http://www.apache.org/licenses/LICENSE-2.0
+
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
 import React from 'react'
 import Link from '../Link'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { getAccordingScrollValue } from '../../lib/scroll'
 
 /**
  * Item of the Header, allow to use Link and a simple onClick action
@@ -19,13 +37,15 @@ export default function HeaderItem({
   onClick,
   scrolled,
   color,
-  button
+  button,
+  hideOnSmallDevice
 }) {
   const itemClass = classNames({
     'text-sm cursor-pointer': true,
     'py-3 md:py-4': !scrolled,
     'py-2 md:py-3': scrolled,
-    'text-gray-600': !color
+    'text-gray-600': !color,
+    'hidden md:block': hideOnSmallDevice
   })
   const buttonClass = classNames({
     'text-sm px-6 py-2': true,
@@ -40,18 +60,10 @@ export default function HeaderItem({
       <Link
         href={href}
         className={itemClass}
-        style={
-          color &&
-          !button && {
-            color:
-              typeof color === 'object'
-                ? color.initial && (!scrolled || color.onScroll === undefined)
-                  ? color.initial
-                  : color.onScroll && scrolled && color.onScroll
-                : color,
-            alignSelf: button && 'center'
-          }
-        }
+        style={{
+          color: !button && getAccordingScrollValue(color, scrolled),
+          alignSelf: button && 'center'
+        }}
       >
         {button ? (
           <span
@@ -59,21 +71,10 @@ export default function HeaderItem({
             style={{
               backgroundColor:
                 typeof button === 'object' &&
-                typeof button.background === 'object'
-                  ? button.background.initial &&
-                    (!scrolled || button.background.onScroll === undefined)
-                    ? button.background.initial
-                    : button.background.onScroll &&
-                      scrolled &&
-                      button.background.onScroll
-                  : button.background,
+                getAccordingScrollValue(button.background, scrolled),
               color:
-                typeof button === 'object' && typeof button.color === 'object'
-                  ? button.color.initial &&
-                    (!scrolled || button.color.onScroll === undefined)
-                    ? button.color.initial
-                    : button.color.onScroll && scrolled && button.color.onScroll
-                  : button.color
+                typeof button === 'object' &&
+                getAccordingScrollValue(button.color, scrolled)
             }}
           >
             {label}
@@ -90,12 +91,7 @@ export default function HeaderItem({
       onClick={onClick}
       className={itemClass}
       style={{
-        color:
-          !button && typeof color === 'object'
-            ? color.initial && (!scrolled || color.onScroll === undefined)
-              ? color.initial
-              : color.onScroll && scrolled && color.onScroll
-            : color,
+        color: !button && getAccordingScrollValue(color, scrolled),
         alignSelf: button && 'center'
       }}
     >
@@ -105,21 +101,10 @@ export default function HeaderItem({
           style={{
             backgroundColor:
               typeof button === 'object' &&
-              typeof button.background === 'object'
-                ? button.background.initial &&
-                  (!scrolled || button.background.onScroll === undefined)
-                  ? button.background.initial
-                  : button.background.onScroll &&
-                    scrolled &&
-                    button.background.onScroll
-                : button.background,
+              getAccordingScrollValue(button.background, scrolled),
             color:
-              typeof button === 'object' && typeof button.color === 'object'
-                ? button.color.initial &&
-                  (!scrolled || button.color.onScroll === undefined)
-                  ? button.color.initial
-                  : button.color.onScroll && scrolled && button.color.onScroll
-                : button.color
+              typeof button === 'object' &&
+              getAccordingScrollValue(button.color, scrolled)
           }}
         >
           {label}
