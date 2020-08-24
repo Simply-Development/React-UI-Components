@@ -16,6 +16,8 @@ npm install --save simply-react-ui-components tailwindcss
 
 We need to wrap our App into SimplyUIProvider to config some thinigs as the Link component that we're going to use to move around our application.
 
+## Provider
+
 ```js
 import { SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
@@ -29,6 +31,13 @@ export default function App() {
   )
 }
 ```
+
+### Properties
+
+| name | Type | Description |
+| - | - | - |
+| Link | String, node or function | Set the Link element that is going to be used to move in the application. Default: 'a' |
+| library | String | If your going to use an extra library like NextJS, this is were you need to specify it. Default: undefined
 
 ## Components
 
@@ -61,6 +70,19 @@ export default function Layout() {
   )
 }
 ```
+
+### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| position | String | Define the Header position. Default: 'relative' |
+| title | String or function | Define the Header title, usually is the platfform name, allow you to pass a function to fully personalize this part. Default: '' |
+| shadow | Boolean or String | This enable a small elevation, can be shown when there's scroll or always. Default: false |
+| background | String or object | Set the Header background, allow to set a static solid background, a translucent background or even a background who changes depending on scroll. Default: undefined |
+| color | String or object | Set the color from label items, allow you to set a static value, a value from labels and title or event an initial color and a scroll color for both, title and labels. Default: undefined |
+| items | Array | Here you can set the header item labels like a blog label or a sign in button. The array must receive objects with a label item, allow you to set an href or onClick action also accepts the button item to make item look like a button. Default: [] |
+| sidebarButton | Boolean, function or String | Choose if you want to display a sidebar button always, only in small devices or big devices, also allow you to pass a function to fully customize the sidebar button, when you use a function, the function receive this values to let you interact with header internal state: isSidebarOpen, setIsSidebarOpen, scrolled. Default: false |
+| hideItemsOnSmallDevices | Boolean | This let the header items intact even in small devices, in false then the items will hide on small devices. Default: true |
 
 ## License
 

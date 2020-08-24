@@ -14,9 +14,22 @@
  * limitations under the License.
  */
 
-import SimplyUIContext, { SimplyUIProvider } from './contexts/SimplyUIContext'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import React from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-export default SimplyUIContext
-export { SimplyUIProvider, Header, Footer }
+export default function Footer({}) {
+  return (
+    <footer>
+      
+    </footer>
+  )
+}
+
+Footer.defaultProps = {
+  
+}
+
+Footer.propTypes = {
+
+}
