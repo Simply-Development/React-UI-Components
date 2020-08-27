@@ -16,7 +16,8 @@
 
 import SimplyUIContext, { SimplyUIProvider } from './contexts/SimplyUIContext'
 import Header from './components/Header'
+import Banner from './components/Banner'
 import Footer from './components/Footer'
 
 export default SimplyUIContext
-export { SimplyUIProvider, Header, Footer }
+export { SimplyUIProvider, Header, Banner, Footer }

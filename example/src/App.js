@@ -15,13 +15,29 @@
  */
 
 import React from 'react'
-import { Footer, SimplyUIProvider } from 'simply-react-ui-components'
+import { Banner, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <Footer
-      
+    <Banner
+      background="black"
+      title="Lo que necesitas, cuando lo necesitas"
+      color={{
+        title: 'white',
+        message: 'white',
+        accent: 'red'
+      }}
+      contentPosition={{
+        small: 'center',
+        big: 'left'
+      }}
+      message="Encargate de lo que amas, nosotros nos encargamos del desarrollo y la estrategía para ayudarte a crecer"
+      button={{
+        text: 'Comencemos',
+        color: 'white',
+        rounded: true
+      }}
     />
   </SimplyUIProvider>
 }
