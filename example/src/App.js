@@ -23,19 +23,10 @@ const App = () => {
     <Banner
       background="black"
       title="Lo que necesitas, cuando lo necesitas"
-      color={{
-        title: 'white',
-        message: 'white',
-        accent: 'red'
-      }}
-      contentPosition={{
-        small: 'center',
-        big: 'left'
-      }}
+      color="white"
       message="Encargate de lo que amas, nosotros nos encargamos del desarrollo y la estrategía para ayudarte a crecer"
       button={{
         text: 'Comencemos',
-        color: 'white',
         rounded: true
       }}
     />

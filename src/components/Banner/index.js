@@ -29,7 +29,8 @@ export default function Banner({
   contentPosition,
   color,
   message,
-  button
+  button,
+  image
 }) {
   const mainContainer = classnames({
     'grid grid-cols-12 h-screen items-center': true,
@@ -46,11 +47,31 @@ export default function Banner({
       contentPosition === 'left' || contentPosition.big === 'left',
     'col-end-12 col-span-7':
       contentPosition === 'right' || contentPosition.small === 'right',
-    'md:col-end-12 md:col-span-6 lg:col-end-12 lg:col-span-5':
+    'md:col-end-12 md:col-span-6 lg:col-end-12 lg:col-span-5 md:order-2':
       contentPosition === 'right' || contentPosition.big === 'right',
     'col-span-8 col-start-3':
       contentPosition === 'center' || contentPosition.small === 'center',
     'md:col-span-6 md:col-start-4 lg:col-start-5 lg:col-span-4':
+      contentPosition === 'center' || contentPosition.big === 'center'
+  })
+  const rightContentClass = classnames({
+    'hidden md:block md:col-start-9 md:col-span-3 lg:col-start-8 lg:col-span-4':
+      contentPosition === 'left' || contentPosition.small === 'left',
+    'hidden md:block md:col-start-2':
+      contentPosition === 'right' || contentPosition.small === 'right',
+    hidden: contentPosition === 'center' || contentPosition.small === 'center',
+    'md:hidden':
+      contentPosition === 'center' || contentPosition.big === 'center'
+  })
+  const justifyContainerClass = classnames({
+    flex: true,
+    'justify-end':
+      contentPosition === 'right' || contentPosition.small === 'right',
+    'md:justify-end':
+      contentPosition === 'right' || contentPosition.big === 'right',
+    'justify-center':
+      contentPosition === 'center' || contentPosition.small === 'center',
+    'md:justify-center':
       contentPosition === 'center' || contentPosition.big === 'center'
   })
 
@@ -94,13 +115,15 @@ export default function Banner({
         </h1>
         {message && (
           <Fragment>
-            <div
-              className='h-2 w-10 my-4 rounded-full'
-              style={{
-                backgroundColor:
-                  typeof color === 'object' ? color.accent : color
-              }}
-            />
+            <div className={justifyContainerClass}>
+              <div
+                className='h-2 w-10 my-4 rounded-full'
+                style={{
+                  backgroundColor:
+                    typeof color === 'object' ? color.accent : color
+                }}
+              />
+            </div>
             <p
               style={{
                 color: typeof color === 'object' ? color.message : color,
@@ -112,14 +135,27 @@ export default function Banner({
           </Fragment>
         )}
         {button && (
-          <Button
-            background={color.accent}
-            color={button.color}
-            rounded={button.rounded}
-            className='mt-8'
-          >
-            {button.text}
-          </Button>
+          <div className={justifyContainerClass}>
+            <Button
+              background={color.accent || color}
+              color={button.color}
+              rounded={button.rounded}
+              className='mt-8'
+              href={button.href}
+              onClick={button.onClick}
+            >
+              {button.text}
+            </Button>
+          </div>
+        )}
+      </div>
+      <div className={rightContentClass}>
+        {typeof image === 'object' ? (
+          <img src={image.source} alt={image.alt} className={image.className} />
+        ) : typeof image === 'function' ? (
+          image()
+        ) : (
+          image && <img src={image} />
         )}
       </div>
     </div>
@@ -139,6 +175,14 @@ Banner.propTypes = {
       size: PropTypes.string
     })
   ]),
+  color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      title: PropTypes.string,
+      message: PropTypes.string,
+      accent: PropTypes.string
+    })
+  ]),
   contentPosition: PropTypes.oneOfType([
     PropTypes.oneOf(['left', 'right', 'center']),
     PropTypes.shape({
@@ -149,13 +193,27 @@ Banner.propTypes = {
   title: PropTypes.string.isRequired,
   message: PropTypes.string,
   button: PropTypes.shape({
-    text: PropTypes.string.isRequired
-  })
+    text: PropTypes.string.isRequired,
+    rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
+    color: PropTypes.string,
+    href: PropTypes.string,
+    onClick: PropTypes.func
+  }),
+  image: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      source: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+      className: PropTypes.string
+    }),
+    PropTypes.func
+  ])
 }
 
 Banner.defaultProps = {
   contentPosition: 'left',
   background: undefined,
   message: undefined,
-  button: undefined
+  button: undefined,
+  image: undefined
 }

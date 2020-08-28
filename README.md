@@ -71,7 +71,7 @@ export default function Layout() {
 }
 ```
 
-### Properties
+#### Properties
 
 | Name | Type | Description |
 | - | - | - |
@@ -83,6 +83,42 @@ export default function Layout() {
 | items | Array | Here you can set the header item labels like a blog label or a sign in button. The array must receive objects with a label item, allow you to set an href or onClick action also accepts the button item to make item look like a button. Default: [] |
 | sidebarButton | Boolean, function or String | Choose if you want to display a sidebar button always, only in small devices or big devices, also allow you to pass a function to fully customize the sidebar button, when you use a function, the function receive this values to let you interact with header internal state: isSidebarOpen, setIsSidebarOpen, scrolled. Default: false |
 | hideItemsOnSmallDevices | Boolean | This let the header items intact even in small devices, in false then the items will hide on small devices. Default: true |
+
+### Banner
+
+The Banner component it's useful to start a page, write your pitch and show your brand to your users.
+
+```js
+import { Banner } from 'simply-react-ui-components'
+
+export default function Layout() {
+  return (
+    <>
+      <Banner
+        background="black"
+        title="Lo que necesitas, cuando lo necesitas"
+        color="white"
+        message="Encargate de lo que amas, nosotros nos encargamos del desarrollo y la estrategía para ayudarte a crecer"
+        button={{
+          text: 'Comencemos',
+          rounded: true
+        }}
+      />
+    </>
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| background | String or object | Set the background of the banner with a solid color, a linear gradient or an image. Default: undefined |
+| contentPosition | String or object | Set the position of the main content, also let you set a position for small devices and for big ones. Default: 'left' |
+| title | String | Title of the banner, this is were you begin your pitch. |
+| message | String | Here you can complete your pitch. Default: undefined |
+| button | String or object | Call to action, use this to move your users to another page or execute some action. default: undefined |
+| image | String, object or function | Complete your banner putting some image of your products or pass a custom component to fully customize it. Default: undefined |
 
 ## License
 

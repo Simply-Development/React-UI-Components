@@ -28,14 +28,12 @@ export default function Button({
   rounded,
   className
 }) {
-  const mainContainerClass = classnames(
-    {
-      'px-5 py-3 font-bold uppercase w-full md:w-auto': true,
-      rounded: typeof rounded === 'boolean' && rounded,
-      'rounded-full': rounded === 'full'
-    },
-    className
-  )
+  const mainContainerClass = classnames({
+    'px-5 py-3 font-bold uppercase w-full md:w-auto': true,
+    rounded: typeof rounded === 'boolean' && rounded,
+    'rounded-full': rounded === 'full',
+    [className]: className
+  })
 
   if (href) {
     return (
@@ -69,9 +67,9 @@ export default function Button({
 
 Button.propTypes = {
   rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
-  className: PropTypes.object
+  className: PropTypes.string
 }
 
 Button.defaultProps = {
-  className: {}
+  className: undefined
 }

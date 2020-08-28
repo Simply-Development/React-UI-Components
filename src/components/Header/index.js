@@ -25,18 +25,7 @@ import HamburgerMenu from 'react-hamburger-menu'
 /**
  * Header component with shadow on scroll and tabs with sub tabs
  *
- * @param position The header position, default: relative
- * @param title Can pass just a text, object with className to personalize or
- * function for full customization
- * @param shadow A string or bool to define if shadow is present always or
- * just when page has been scrolled
- * @param background A string or object with the color and variant of the
- * header background
- * @param color A string or object with the color of the texts when page have been
- * scrolled and when not
- * @param items An array of objects with the data of the tabs to render
- * @param sidebarButton A bool value, function or node to determine if the
- * sidebar button is shown
+ * @component
  * */
 export default function Header({
   position,
@@ -46,7 +35,8 @@ export default function Header({
   color,
   sidebarButton,
   items,
-  hideItemsOnSmallDevices
+  hideItemsOnSmallDevices,
+  setSidebarState
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -90,6 +80,15 @@ export default function Header({
       }
     }
   }, [])
+
+  /**
+   * Expose sidebar state
+   */
+  useEffect(() => {
+    if (typeof setSidebarState === 'function') {
+      setSidebarState(isSidebarOpen)
+    }
+  }, [isSidebarOpen])
 
   const headerClass = classNames({
     'grid grid-cols-12 z-20': true,
@@ -190,10 +189,10 @@ export default function Header({
                     strokeWidth={2}
                     className={sidebarButtonClass}
                     rotate={0}
-                    color={getAccordingScrollValue(
-                      color.item || color,
-                      scrolled
-                    )}
+                    color={
+                      color &&
+                      getAccordingScrollValue(color.item || color, scrolled)
+                    }
                     borderRadius={0}
                     animationDuration={0.5}
                   />
@@ -214,7 +213,8 @@ Header.defaultProps = {
   color: undefined,
   items: [],
   sidebarButton: false,
-  hideItemsOnSmallDevices: true
+  hideItemsOnSmallDevices: true,
+  setSidebarState: undefined
 }
 
 Header.propTypes = {
@@ -287,5 +287,6 @@ Header.propTypes = {
     PropTypes.func,
     PropTypes.oneOf(['onlySmall', 'onlyBig'])
   ]),
-  hideItemsOnSmallDevices: PropTypes.bool
+  hideItemsOnSmallDevices: PropTypes.bool,
+  setSidebarState: PropTypes.func
 }
