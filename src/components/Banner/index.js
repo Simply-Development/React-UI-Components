@@ -72,7 +72,23 @@ export default function Banner({
     'justify-center':
       contentPosition === 'center' || contentPosition.small === 'center',
     'md:justify-center':
-      contentPosition === 'center' || contentPosition.big === 'center'
+      contentPosition === 'center' || contentPosition.big === 'center',
+    'md:justify-start': contentPosition.big === 'left'
+  })
+  const justifyTextClass = classnames({
+    'text-right':
+      contentPosition === 'right' || contentPosition.small === 'right',
+    'md:text-right':
+      contentPosition === 'right' || contentPosition.big === 'right',
+    'text-center':
+      contentPosition === 'center' || contentPosition.small === 'center',
+    'md:text-center':
+      contentPosition === 'center' || contentPosition.big === 'center',
+    'md:text-left': contentPosition.big === 'left'
+  })
+  const titleClass = classnames({
+    [justifyTextClass]: true,
+    'text-3xl font-bold': true
   })
 
   return (
@@ -106,10 +122,9 @@ export default function Banner({
       <div className={contentClass}>
         <h1
           style={{
-            color: typeof color === 'object' ? color.title : color,
-            textAlign: contentPosition
+            color: typeof color === 'object' ? color.title : color
           }}
-          className='text-3xl font-bold'
+          className={titleClass}
         >
           {title}
         </h1>
@@ -125,9 +140,9 @@ export default function Banner({
               />
             </div>
             <p
+              className={justifyTextClass}
               style={{
-                color: typeof color === 'object' ? color.message : color,
-                textAlign: contentPosition
+                color: typeof color === 'object' ? color.message : color
               }}
             >
               {message}

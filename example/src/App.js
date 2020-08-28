@@ -25,6 +25,10 @@ const App = () => {
       title="Lo que necesitas, cuando lo necesitas"
       color="white"
       message="Encargate de lo que amas, nosotros nos encargamos del desarrollo y la estrategía para ayudarte a crecer"
+      contentPosition={{
+        small: 'center',
+        big: 'left'
+      }}
       button={{
         text: 'Comencemos',
         rounded: true
