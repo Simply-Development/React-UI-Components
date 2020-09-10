@@ -83,6 +83,7 @@ export default function Layout() {
 | items | Array | Here you can set the header item labels like a blog label or a sign in button. The array must receive objects with a label item, allow you to set an href or onClick action also accepts the button item to make item look like a button. Default: [] |
 | sidebarButton | Boolean, function or String | Choose if you want to display a sidebar button always, only in small devices or big devices, also allow you to pass a function to fully customize the sidebar button, when you use a function, the function receive this values to let you interact with header internal state: isSidebarOpen, setIsSidebarOpen, scrolled. Default: false |
 | hideItemsOnSmallDevices | Boolean | This let the header items intact even in small devices, in false then the items will hide on small devices. Default: true |
+| withCart | Boolean or String | Show a cart icon if true, show a cart icon with link if value is a String. Default: false |
 
 ### Banner
 
@@ -122,4 +123,4 @@ export default function Layout() {
 
 ## License
 
-MIT © [schorts99](https://github.com/Schorts99)
+MIT © [Simply Development](https://github.com/Simply-Development)

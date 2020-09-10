@@ -21,6 +21,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { getAccordingScrollValue } from '../../lib/scroll'
 import HamburgerMenu from 'react-hamburger-menu'
+import { FiShoppingCart } from 'react-icons/fi'
 
 /**
  * Header component with shadow on scroll and tabs with sub tabs
@@ -36,7 +37,8 @@ export default function Header({
   sidebarButton,
   items,
   hideItemsOnSmallDevices,
-  setSidebarState
+  setSidebarState,
+  withCart
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -177,6 +179,27 @@ export default function Header({
                   }
                 />
               ))}
+              {typeof withCart === 'boolean' ? (
+                <FiShoppingCart
+                  size='1.5em'
+                  color={
+                    color &&
+                    getAccordingScrollValue(color.item || color, scrolled)
+                  }
+                />
+              ) : (
+                typeof withCart === 'string' && (
+                  <Link href={withCart}>
+                    <FiShoppingCart
+                      size='1.5em'
+                      color={
+                        color &&
+                        getAccordingScrollValue(color.item || color, scrolled)
+                      }
+                    />
+                  </Link>
+                )
+              )}
               {sidebarButton &&
                 (typeof sidebarButton === 'function' ? (
                   sidebarButton({ isSidebarOpen, setIsSidebarOpen, scrolled })
@@ -214,7 +237,8 @@ Header.defaultProps = {
   items: [],
   sidebarButton: false,
   hideItemsOnSmallDevices: true,
-  setSidebarState: undefined
+  setSidebarState: undefined,
+  withCart: false
 }
 
 Header.propTypes = {
@@ -288,5 +312,6 @@ Header.propTypes = {
     PropTypes.oneOf(['onlySmall', 'onlyBig'])
   ]),
   hideItemsOnSmallDevices: PropTypes.bool,
-  setSidebarState: PropTypes.func
+  setSidebarState: PropTypes.func,
+  withCart: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
 }

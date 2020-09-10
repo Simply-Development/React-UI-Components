@@ -1,10 +1,16 @@
 {
   "name": "simply-react-ui-components",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Simple and Minimalist React Components Library",
-  "author": "Schorts99",
+  "author": "Simply Development",
+  "contributors": [
+    {
+      "name": "Jorge Castillo",
+      "email": "schorts99@gmail.com"
+    }
+  ],
   "license": "MIT",
-  "repository": "Schorts99/simply-react-ui-components",
+  "repository": "Simply-Development/simply-react-ui-components",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -53,6 +59,7 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
-    "react-hamburger-menu": "^1.2.1"
+    "react-hamburger-menu": "^1.2.1",
+    "react-icons": "^3.11.0"
   }
 }
