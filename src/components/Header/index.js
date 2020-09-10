@@ -179,7 +179,7 @@ export default function Header({
                   }
                 />
               ))}
-              {typeof withCart === 'boolean' ? (
+              {typeof withCart === 'boolean' && withCart ? (
                 <FiShoppingCart
                   size='1.5em'
                   color={
