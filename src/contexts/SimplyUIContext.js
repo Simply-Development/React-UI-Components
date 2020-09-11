@@ -37,7 +37,7 @@ function SimplyUIProvider({ children, Link, library }) {
 }
 
 SimplyUIProvider.defaultProps = {
-  Link: 'a',
+  Link: undefined,
   library: undefined
 }
 

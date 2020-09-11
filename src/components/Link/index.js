@@ -27,7 +27,13 @@ import PropTypes from 'prop-types'
  * @param className The className to stylish the component
  * @param style The styles object
  * */
-export default function LinkComponent({ children, href, className, style }) {
+export default function LinkComponent({
+  children,
+  href,
+  className,
+  style,
+  as
+}) {
   const { Link, library } = useContext(SimplyUIContext)
 
   if (Link === undefined) {
@@ -40,8 +46,10 @@ export default function LinkComponent({ children, href, className, style }) {
   switch (library) {
     case 'nextjs':
       return (
-        <Link href={href}>
-          <a className={className} style={style}>{children}</a>
+        <Link href={href} as={as}>
+          <a className={className} style={style}>
+            {children}
+          </a>
         </Link>
       )
     default:

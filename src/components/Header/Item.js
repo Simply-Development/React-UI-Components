@@ -37,7 +37,8 @@ export default function HeaderItem({
   scrolled,
   color,
   button,
-  hideOnSmallDevice
+  hideOnSmallDevice,
+  as
 }) {
   const itemClass = classNames({
     'text-sm cursor-pointer': true,
@@ -58,6 +59,7 @@ export default function HeaderItem({
     return (
       <Link
         href={href}
+        as={as}
         className={itemClass}
         style={{
           color: !button && getAccordingScrollValue(color, scrolled),
@@ -126,26 +128,25 @@ HeaderItem.propTypes = {
 HeaderItem.propTypes = {
   label: PropTypes.string.isRequired,
   href: PropTypes.string,
+  as: PropTypes.string,
   onClick: PropTypes.func,
   scrolled: PropTypes.bool,
-  color: PropTypes.oneOfType([
+  color: PropTypes.oneOf([
     PropTypes.string,
-    PropTypes.oneOf([
-      PropTypes.shape({
+    PropTypes.shape({
+      initial: PropTypes.string,
+      onScroll: PropTypes.string
+    }),
+    PropTypes.shape({
+      title: PropTypes.shape({
         initial: PropTypes.string,
         onScroll: PropTypes.string
       }),
-      PropTypes.shape({
-        title: PropTypes.shape({
-          initial: PropTypes.string,
-          onScroll: PropTypes.string
-        }),
-        item: PropTypes.shape({
-          initial: PropTypes.string,
-          onScroll: PropTypes.string
-        })
+      item: PropTypes.shape({
+        initial: PropTypes.string,
+        onScroll: PropTypes.string
       })
-    ])
+    })
   ]),
   button: PropTypes.oneOfType([
     PropTypes.bool,

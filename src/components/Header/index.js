@@ -267,29 +267,28 @@ Header.propTypes = {
   ]),
   color: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.oneOf([
-      PropTypes.shape({
-        title: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.shape({
-            initial: PropTypes.string,
-            onScroll: PropTypes.string
-          })
-        ]),
-        item: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.shape({
-            initial: PropTypes.string,
-            onScroll: PropTypes.string
-          })
-        ])
-      })
-    ])
+    PropTypes.shape({
+      title: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          initial: PropTypes.string,
+          onScroll: PropTypes.string
+        })
+      ]),
+      item: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+          initial: PropTypes.string,
+          onScroll: PropTypes.string
+        })
+      ])
+    })
   ]),
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       href: PropTypes.string,
+      as: PropTypes.string,
       onClick: PropTypes.func,
       button: PropTypes.oneOfType([
         PropTypes.bool,
