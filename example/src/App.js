@@ -23,6 +23,8 @@ const App = () => {
     <Header      
       title="Simply Development"
       withCart
+      cartCount={1}
+      sidebarButton
     />
   </SimplyUIProvider>
 }

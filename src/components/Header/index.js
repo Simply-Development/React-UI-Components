@@ -22,6 +22,7 @@ import PropTypes from 'prop-types'
 import { getAccordingScrollValue } from '../../lib/scroll'
 import HamburgerMenu from 'react-hamburger-menu'
 import { FiShoppingCart } from 'react-icons/fi'
+import NotificationBadge from 'react-notification-badge'
 
 /**
  * Header component with shadow on scroll and tabs with sub tabs
@@ -38,7 +39,8 @@ export default function Header({
   items,
   hideItemsOnSmallDevices,
   setSidebarState,
-  withCart
+  withCart,
+  cartCount
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -130,6 +132,14 @@ export default function Header({
     'hidden md:block':
       typeof sidebarButton === 'string' && sidebarButton === 'onlyBig'
   })
+  const cartContainerClass = classNames({
+    relative: true,
+    flex: typeof withCart !== 'object' || withCart.showOn === undefined,
+    'md:hidden':
+      typeof withCart === 'object' && withCart.showOn === 'onlySmall',
+    'hidden md:flex':
+      typeof withCart === 'object' && withCart.showOn === 'onlyBig'
+  })
 
   return (
     <header
@@ -180,16 +190,48 @@ export default function Header({
                 />
               ))}
               {typeof withCart === 'boolean' && withCart ? (
-                <FiShoppingCart
-                  size='1.5em'
-                  color={
-                    color &&
-                    getAccordingScrollValue(color.item || color, scrolled)
-                  }
-                />
+                <div className={cartContainerClass}>
+                  <FiShoppingCart
+                    size='1.5em'
+                    color={
+                      color &&
+                      getAccordingScrollValue(color.item || color, scrolled)
+                    }
+                  />
+                  {cartCount > 0 && (
+                    <NotificationBadge
+                      count={cartCount}
+                      containerStyle={{
+                        position: 'absolute',
+                        top: '-3px',
+                        right: '-6px'
+                      }}
+                    />
+                  )}
+                </div>
+              ) : typeof withCart === 'string' ? (
+                <Link href={withCart} className={cartContainerClass}>
+                  <FiShoppingCart
+                    size='1.5em'
+                    color={
+                      color &&
+                      getAccordingScrollValue(color.item || color, scrolled)
+                    }
+                  />
+                  {cartCount > 0 && (
+                    <NotificationBadge
+                      count={cartCount}
+                      containerStyle={{
+                        position: 'absolute',
+                        top: '-3px',
+                        right: '-6px'
+                      }}
+                    />
+                  )}
+                </Link>
               ) : (
-                typeof withCart === 'string' && (
-                  <Link href={withCart}>
+                typeof withCart === 'object' && (
+                  <Link href={withCart.href} className={cartContainerClass}>
                     <FiShoppingCart
                       size='1.5em'
                       color={
@@ -197,6 +239,16 @@ export default function Header({
                         getAccordingScrollValue(color.item || color, scrolled)
                       }
                     />
+                    {cartCount > 0 && (
+                      <NotificationBadge
+                        count={cartCount}
+                        containerStyle={{
+                          position: 'absolute',
+                          top: '-3px',
+                          right: '-6px'
+                        }}
+                      />
+                    )}
                   </Link>
                 )
               )}
@@ -238,7 +290,8 @@ Header.defaultProps = {
   sidebarButton: false,
   hideItemsOnSmallDevices: true,
   setSidebarState: undefined,
-  withCart: false
+  withCart: false,
+  cartCount: undefined
 }
 
 Header.propTypes = {
@@ -312,5 +365,13 @@ Header.propTypes = {
   ]),
   hideItemsOnSmallDevices: PropTypes.bool,
   setSidebarState: PropTypes.func,
-  withCart: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+  withCart: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+    PropTypes.shape({
+      href: PropTypes.string,
+      showOn: PropTypes.oneOf(['onlySmall', 'onlyBig'])
+    })
+  ]),
+  cartCount: PropTypes.number
 }
