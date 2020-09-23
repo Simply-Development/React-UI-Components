@@ -15,16 +15,30 @@
  */
 
 import React from 'react'
-import { Header, SimplyUIProvider } from 'simply-react-ui-components'
+import { Banner, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <Header      
-      title="Simply Development"
-      withCart
-      cartCount={1}
-      sidebarButton
+    <Banner
+      background="black"
+      title="Title"
+      contentPosition={{
+        small: 'center',
+        big: 'left',
+      }}
+      color={{
+        title: 'white',
+        accent: '#e53e3e',
+        message: '#f7fafc',
+      }}
+      message="Cool message"
+      button={{
+        text: 'Action',
+        color: 'white',
+        rounded: true,
+        href: '/'
+      }}
     />
   </SimplyUIProvider>
 }

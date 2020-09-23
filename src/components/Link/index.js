@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import SimplyUIContext from '../../contexts/SimplyUIContext'
 import PropTypes from 'prop-types'
+import verifyURL from '../../lib/verifyURL'
 
 /**
  * The Link to move around the application, return a simple a html tag
  * or a custom Component provided at SimpleUIProvider
  *
- * @param children The content of the component
- * @param href The href a property
- * @param className The className to stylish the component
- * @param style The styles object
+ * @component
  * */
 export default function LinkComponent({
   children,
@@ -35,8 +33,15 @@ export default function LinkComponent({
   as
 }) {
   const { Link, library } = useContext(SimplyUIContext)
+  const [isExternalLink, setIsExternalLink] = useState(false)
 
-  if (Link === undefined) {
+  useEffect(() => {
+    if (verifyURL(href)) {
+      setIsExternalLink(true)
+    }
+  }, [])
+
+  if (Link === undefined || isExternalLink) {
     return (
       <a href={href} className={className} style={style}>
         {children}
