@@ -86,6 +86,61 @@ export default function Layout() {
 | withCart | Object, Boolean or String | Show a cart icon if true, show a cart icon with link if value is a String. Also have the possibility to show it only on specific screen size. Default: false |
 | cartCount | Number | This allow you to display a count of the items in the cart. Default: undefined |
 
+### Footer
+
+The Footer componnent has the necessary to make your site comfortable to your users.
+
+```js
+import { Footer } from 'simply-react-ui-components'
+
+export default function Layout() {
+  return (
+    <>
+      <Footer
+        brand={{
+          short: 'Simply Development',
+          long: 'Simply Development',
+          withCopyright: true,
+          withYear: true
+        }}
+        background="black"
+        color={{
+          title: 'white',
+          item: 'white'
+        }}
+        social={{
+          facebook: 'https://www.facebook.com/simplydevelopmnt',
+          instagram: 'https://www.instagram.com/simplydevelopmnt/',
+          twitter: 'https://twitter.com/SimplyDvelopmnt',
+          linkedin: 'https://www.linkedin.com/company/simply-development',
+          github: 'https://github.com/Simply-Development'
+        }}
+        items={[
+          {
+            label: 'Privacy',
+            href: '/privacy'
+          },
+          {
+            label: 'Terms of use',
+            href: '/terms-of-use'
+          }
+        ]}
+      />
+    </>
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| brand | String, function or object | You can pass a simple String, or be more explicit passing and object with copyright and year to look more profesional, you can also can have total control passing a custom component as a function |
+| background | String | Here you can set the footer background. Default: undefined |
+| color | String or object | Set the color of the footer elements, you can als set a color for brand and for other elements. Default: undefined |
+| items | Array | Set the footer elements, like privacy page, terms and conditions and stuffs like that. Default: [] |
+| social | object | Set your social networks. Default: undefined |
+
 ### Banner
 
 The Banner component it's useful to start a page, write your pitch and show your brand to your users.
