@@ -85,6 +85,7 @@ export default function Layout() {
 | hideItemsOnSmallDevices | Boolean | This let the header items intact even in small devices, in false then the items will hide on small devices. Default: true |
 | withCart | Object, Boolean or String | Show a cart icon if true, show a cart icon with link if value is a String. Also have the possibility to show it only on specific screen size. Default: false |
 | cartCount | Number | This allow you to display a count of the items in the cart. Default: undefined |
+| sidebarState | Boolean | Sync internal state with external. Default: undefined |
 
 ### Footer
 

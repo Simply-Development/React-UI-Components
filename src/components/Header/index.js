@@ -39,11 +39,21 @@ export default function Header({
   items,
   hideItemsOnSmallDevices,
   setSidebarState,
+  sidebarState,
   withCart,
   cartCount
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  /**
+   * Sync internal sidebar state with internal state
+   */
+  useEffect(() => {
+    if (typeof sidebarState === 'boolean') {
+      setIsSidebarOpen(sidebarState)
+    }
+  }, [sidebarState])
 
   /**
    * Add scroll listener to add shadow on user scroll if any prop includes
@@ -291,7 +301,8 @@ Header.defaultProps = {
   hideItemsOnSmallDevices: true,
   setSidebarState: undefined,
   withCart: false,
-  cartCount: undefined
+  cartCount: undefined,
+  sidebarState: undefined
 }
 
 Header.propTypes = {
@@ -373,5 +384,6 @@ Header.propTypes = {
       showOn: PropTypes.oneOf(['onlySmall', 'onlyBig'])
     })
   ]),
-  cartCount: PropTypes.number
+  cartCount: PropTypes.number,
+  sidebarState: PropTypes.bool,
 }
