@@ -43,6 +43,40 @@ export default function App() {
 
 I'm starting this development as a hobby so feel free to make changes and I'll review them to merge with the main project.
 
+### Button
+
+The Button component has just necessary to look good and work good taking the role of a simply button or a Link, if you use an internal Link the it's going to use Link component provided at SimplyUIProvider, otherwhise it's going to use an a tag.
+
+```js
+import { Button } from 'simply-react-ui-components'
+
+export default function Layout() {
+  return (
+    <>
+      <Button
+        background="e53e3e"
+        color="white"
+        href="/contact"
+      >
+        Let's start
+      </Button>
+    </>
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| children | ReactNode | Content from the button, you can pass just a string or a whole component if you want something like an icon with the text or something like that. |
+| onClick | function | The function to trigger when button it's clicked. Default: () => {}. |
+| href | String | The path which you're going to be moved when button it's clicked if you want to. Default: undefined |
+| background | String | Color background of the button. Default: undefined |
+| color | String | Color of the text of the button in case that you pass only a String as children. Default: undefined |
+| rounded | Boolean or String | This is to add rounded courners to Button. Default: undefined |
+| className | String | If you want to add a class to add margin or something. Default: undefined |
+
 ### Header
 
 The Header component has a couple but useful personalizations, like keep header items on small devices, add a shadow when exists scroll, change the background when there's no scroll and when there's is.
@@ -177,6 +211,40 @@ export default function Layout() {
 | message | String | Here you can complete your pitch. Default: undefined |
 | button | String or object | Call to action, use this to move your users to another page or execute some action. default: undefined |
 | image | String, object or function | Complete your banner putting some image of your products or pass a custom component to fully customize it. Default: undefined |
+
+### CookieConsent
+
+This component let you show a simple cookie consent for your users to accept it.
+
+```js
+import { CookieConsent } from 'simply-react-ui-components'
+
+export default function Layout() {
+  return (
+    <>
+      <CookieConsent
+        translucent
+        acceptance="Accept"
+        accent={() => {}}
+      >
+        <>
+          We use cookies and other technologies to collect data about your browser, device and location. For more information see our Privacy Policy.
+        </>
+      </CookieConsent>
+    </>
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| background | String | Background of the container. Default: undefined |
+| translucent | Boolean | If you want the container to be a little bit translucent. Default: false |
+| children | ReactNode | The content to display as message, it's a React node instead of a simple String cause of this way you can set by example an a tag inside to move your users to your privacy policy. |
+| color | String | Color of the the acceptance message. Default: undefined |
+| acceptance | String or Object | This it's the button in the right side, pass a string or an object with text, color an action to trigger when it's clicked. |
 
 ## License
 

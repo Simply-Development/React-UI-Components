@@ -15,22 +15,19 @@
  */
 
 import React from 'react'
-import { Banner, SimplyUIProvider } from 'simply-react-ui-components'
+import { CookieConsent, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <Banner
-      title="What you need, when you need it"
-      message="Take care of what you love, we take care of the development and strategy to help you grow"
-      button={{
-        text: "Let's start",
-        href: '/'
-      }}
-      contentPosition={{
-        small: 'center'
-      }}
-    />
+    <CookieConsent
+      translucent
+      acceptance="Accept"
+    >
+      <>
+        We use cookies and other technologies to collect data about your browser, device and location. For more information see our Privacy Policy.
+      </>
+    </CookieConsent>
   </SimplyUIProvider>
 }
 

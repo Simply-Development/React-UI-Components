@@ -18,6 +18,15 @@ import SimplyUIContext, { SimplyUIProvider } from './contexts/SimplyUIContext'
 import Header from './components/Header'
 import Banner from './components/Banner'
 import Footer from './components/Footer'
+import Button from './components/Button'
+import CookieConsent from './components/CookieConsent'
 
 export default SimplyUIContext
-export { SimplyUIProvider, Header, Banner, Footer }
+export {
+  SimplyUIProvider,
+  Header,
+  Banner,
+  Footer,
+  Button,
+  CookieConsent
+}

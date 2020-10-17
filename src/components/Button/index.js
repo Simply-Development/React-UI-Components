@@ -19,6 +19,11 @@ import Link from '../Link'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
+/**
+ * Button with neccesary config to work as a Link or just a Button
+ * 
+ * @component
+ */
 export default function Button({
   children,
   onClick,
@@ -67,9 +72,18 @@ export default function Button({
 
 Button.propTypes = {
   rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
-  className: PropTypes.string
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  background: PropTypes.string,
+  color: PropTypes.string,
 }
 
 Button.defaultProps = {
-  className: undefined
+  rounded: undefined,
+  className: undefined,
+  onClick: () => {},
+  background: undefined,
+  color: undefined,
+  href: undefined,
 }
