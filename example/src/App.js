@@ -24,7 +24,8 @@ const App = () => {
       title="What you need, when you need it"
       message="Take care of what you love, we take care of the development and strategy to help you grow"
       button={{
-        text: "Let's start"
+        text: "Let's start",
+        href: '/'
       }}
       contentPosition={{
         small: 'center'

@@ -88,6 +88,13 @@ export default function Banner({
     [justifyTextClass]: true,
     'text-3xl font-bold': true
   })
+  const buttonClass = classnames({
+    'mt-8': true,
+    'text-center': contentPosition.small === 'center' || contentPosition === 'center',
+    'md:text-center': contentPosition.big === 'center' || contentPosition === 'center',
+    'text-right': contentPosition.small === 'right' || contentPosition === 'right',
+    'md:text-right': contentPosition.big === 'right' || contentPosition === 'right',
+  })
 
   return (
     <div
@@ -153,7 +160,7 @@ export default function Banner({
               background={color && (color.accent || color)}
               color={button.color}
               rounded={button.rounded}
-              className='mt-8'
+              className={buttonClass}
               href={button.href}
               onClick={button.onClick}
             >
