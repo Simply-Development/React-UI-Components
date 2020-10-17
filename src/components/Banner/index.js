@@ -34,17 +34,15 @@ export default function Banner({
 }) {
   const mainContainer = classnames({
     'grid grid-cols-12 h-screen items-center': true,
-    'bg-center':
-      background.type === 'image' && background.position === undefined,
-    'bg-no-repeat':
-      background.type === 'image' && background.repeat === undefined,
-    'bg-cover': background.type === 'image' && background.size === undefined
+    'bg-center': background && (background.type === 'image' && background.position === undefined),
+    'bg-no-repeat': background && (background.type === 'image' && background.repeat === undefined),
+    'bg-cover': background && (background.type === 'image' && background.size === undefined)
   })
   const contentClass = classnames({
     'col-start-2 col-span-7':
       contentPosition === 'left' || contentPosition.small === 'left',
     'md:col-start-2 md:col-span-6 lg:col-start-2 lg:col-span-5':
-      contentPosition === 'left' || contentPosition.big === 'left',
+      contentPosition === 'left' || contentPosition.big === 'left' || contentPosition.big === undefined,
     'col-end-12 col-span-7':
       contentPosition === 'right' || contentPosition.small === 'right',
     'md:col-end-12 md:col-span-6 lg:col-end-12 lg:col-span-5 md:order-2':
@@ -73,7 +71,7 @@ export default function Banner({
       contentPosition === 'center' || contentPosition.small === 'center',
     'md:justify-center':
       contentPosition === 'center' || contentPosition.big === 'center',
-    'md:justify-start': contentPosition.big === 'left'
+    'md:justify-start': contentPosition.big === 'left' || contentPosition.big === undefined
   })
   const justifyTextClass = classnames({
     'text-right':
@@ -84,7 +82,7 @@ export default function Banner({
       contentPosition === 'center' || contentPosition.small === 'center',
     'md:text-center':
       contentPosition === 'center' || contentPosition.big === 'center',
-    'md:text-left': contentPosition.big === 'left'
+    'md:text-left': contentPosition.big === 'left' || contentPosition.big === undefined
   })
   const titleClass = classnames({
     [justifyTextClass]: true,
@@ -152,7 +150,7 @@ export default function Banner({
         {button && (
           <div className={justifyContainerClass}>
             <Button
-              background={color.accent || color}
+              background={color && (color.accent || color)}
               color={button.color}
               rounded={button.rounded}
               className='mt-8'

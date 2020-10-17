@@ -15,40 +15,20 @@
  */
 
 import React from 'react'
-import { Footer, SimplyUIProvider } from 'simply-react-ui-components'
+import { Banner, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <Footer
-      brand={{
-        short: 'Simply Development',
-        long: 'Simply Development',
-        withCopyright: true,
-        withYear: true
+    <Banner
+      title="What you need, when you need it"
+      message="Take care of what you love, we take care of the development and strategy to help you grow"
+      button={{
+        text: "Let's start"
       }}
-      background="black"
-      color={{
-        title: 'white',
-        item: 'white'
+      contentPosition={{
+        small: 'center'
       }}
-      social={{
-        facebook: 'https://www.facebook.com/simplydevelopmnt',
-        instagram: 'https://www.instagram.com/simplydevelopmnt/',
-        twitter: 'https://twitter.com/SimplyDvelopmnt',
-        linkedin: 'https://www.linkedin.com/company/simply-development',
-        github: 'https://github.com/Simply-Development'
-      }}
-      items={[
-        {
-          label: 'Privacy',
-          href: '/privacy'
-        },
-        {
-          label: 'Terms of use',
-          href: '/terms-of-use'
-        }
-      ]}
     />
   </SimplyUIProvider>
 }
