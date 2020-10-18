@@ -111,7 +111,7 @@ export default function Layout() {
 | - | - | - |
 | position | String | Define the Header position. Default: 'relative' |
 | title | String or function | Define the Header title, usually is the platfform name, allow you to pass a function to fully personalize this part. Default: '' |
-| shadow | Boolean or String | This enable a small elevation, can be shown when there's scroll or always. Default: false |
+| shadow | Boolean, Object or String | This enable a small elevation, can be shown when there's scroll or always, also let you set a custom shadow to match your background. Default: false |
 | background | String or object | Set the Header background, allow to set a static solid background, a translucent background or even a background who changes depending on scroll. Default: undefined |
 | color | String or object | Set the color from label items, allow you to set a static value, a value from labels and title or event an initial color and a scroll color for both, title and labels. Default: undefined |
 | items | Array | Here you can set the header item labels like a blog label or a sign in button. The array must receive objects with a label item, allow you to set an href or onClick action also accepts the button item to make item look like a button. Default: [] |

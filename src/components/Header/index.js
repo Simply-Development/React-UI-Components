@@ -60,14 +60,7 @@ export default function Header({
    * 'onScroll'
    * */
   useEffect(() => {
-    if (
-      (typeof shadow === 'string' && shadow === 'onScroll') ||
-      (typeof background === 'object' && background.onScroll) ||
-      (typeof color === 'object' &&
-        (color.onScroll ||
-          (typeof color.title === 'object' && color.title.onScroll) ||
-          (typeof color.item === 'object' && color.item.onScroll)))
-    ) {
+    if (position === 'fixed') {
       window.addEventListener(
         'scroll',
         () => {
@@ -82,14 +75,7 @@ export default function Header({
     }
 
     return () => {
-      if (
-        (typeof shadow === 'string' && shadow === 'onScroll') ||
-        (typeof background === 'object' && background.onScroll) ||
-        (typeof color === 'object' &&
-          (color.onScroll ||
-            (typeof color.title === 'object' && color.title.onScroll) ||
-            (typeof color.item === 'object' && color.item.onScroll)))
-      ) {
+      if (position === 'fixed') {
         window.removeEventListener('scroll', null)
       }
     }
@@ -110,7 +96,13 @@ export default function Header({
     absolute: position === 'absolute',
     'top-0 w-full': position === 'fixed' || position === 'absolute',
     shadow:
-      typeof shadow === 'string' ? shadow === 'always' || scrolled : shadow,
+      typeof shadow === 'object'
+        ? shadow.value === undefined
+          ? shadow.when === 'always' || scrolled
+          : false
+        : typeof shadow === 'string'
+        ? shadow === 'always' || scrolled
+        : shadow,
     'transition-all duration-100 ease-in-out':
       typeof shadow === 'string' && shadow === 'onScroll',
     'bg-opacity-75':
@@ -154,11 +146,14 @@ export default function Header({
   return (
     <header
       className={headerClass}
-      style={
-        background && {
-          backgroundColor: getAccordingScrollValue(background, scrolled)
-        }
-      }
+      style={{
+        backgroundColor:
+          background && getAccordingScrollValue(background, scrolled),
+        boxShadow:
+          typeof shadow === 'object' && shadow.when === 'always'
+            ? shadow.value
+            : scrolled && shadow.value
+      }}
     >
       <div className='col-start-2 col-span-10'>
         <div className='grid items-center'>
@@ -310,7 +305,11 @@ Header.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   shadow: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.oneOf(['onScroll', 'always'])
+    PropTypes.oneOf(['onScroll', 'always']),
+    PropTypes.shape({
+      when: PropTypes.oneOf(['onScroll', 'always']),
+      value: PropTypes.string
+    })
   ]),
   background: PropTypes.oneOfType([
     PropTypes.string,
@@ -385,5 +384,5 @@ Header.propTypes = {
     })
   ]),
   cartCount: PropTypes.number,
-  sidebarState: PropTypes.bool,
+  sidebarState: PropTypes.bool
 }

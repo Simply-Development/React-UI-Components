@@ -15,19 +15,22 @@
  */
 
 import React from 'react'
-import { CookieConsent, SimplyUIProvider } from 'simply-react-ui-components'
+import { Header, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <CookieConsent
-      translucent
-      acceptance="Accept"
-    >
-      <>
-        We use cookies and other technologies to collect data about your browser, device and location. For more information see our Privacy Policy.
-      </>
-    </CookieConsent>
+    <Header
+      title="Simply Development"
+      color="white"
+      position="fixed"
+      shadow={{
+        when: 'onScroll',
+        value: '0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)'
+      }}
+    />
+    <div className="h-screen bg-black" />
+    <div className="h-screen" />
   </SimplyUIProvider>
 }
 
