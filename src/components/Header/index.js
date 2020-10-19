@@ -60,7 +60,7 @@ export default function Header({
    * 'onScroll'
    * */
   useEffect(() => {
-    if (position === 'fixed') {
+    if (position === 'fixed' || position === 'sticky') {
       window.addEventListener(
         'scroll',
         () => {
@@ -75,7 +75,7 @@ export default function Header({
     }
 
     return () => {
-      if (position === 'fixed') {
+      if (position === 'fixed' || position === 'sticky') {
         window.removeEventListener('scroll', null)
       }
     }
@@ -94,7 +94,8 @@ export default function Header({
     'grid grid-cols-12 z-20': true,
     fixed: position === 'fixed',
     absolute: position === 'absolute',
-    'top-0 w-full': position === 'fixed' || position === 'absolute',
+    'top-0': ['fixed', 'absolute', 'sticky'].includes(position),
+    'w-full': ['fixed', 'absolute'].includes(position),
     shadow:
       typeof shadow === 'object'
         ? shadow.value === undefined
@@ -104,18 +105,7 @@ export default function Header({
         ? shadow === 'always' || scrolled
         : shadow,
     'transition-all duration-100 ease-in-out':
-      typeof shadow === 'string' && shadow === 'onScroll',
-    'bg-opacity-75':
-      typeof background === 'object'
-        ? background.type === 'translucent'
-          ? true
-          : background.initial &&
-            (!scrolled || background.onScroll === undefined)
-          ? background.initial.type === 'translucent'
-          : background.onScroll &&
-            scrolled &&
-            background.onScroll.type === 'translucent'
-        : background
+      typeof shadow === 'string' && shadow === 'onScroll'
   })
   const titleClass = classNames({
     'font-bold inline-block': true,
@@ -301,7 +291,7 @@ Header.defaultProps = {
 }
 
 Header.propTypes = {
-  position: PropTypes.oneOf(['relative', 'fixed', 'absolute']),
+  position: PropTypes.oneOf(['relative', 'fixed', 'absolute', 'sticky']),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   shadow: PropTypes.oneOfType([
     PropTypes.bool,
@@ -314,18 +304,8 @@ Header.propTypes = {
   background: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
-      type: PropTypes.oneOf(['solid', 'translucent']),
-      color: PropTypes.string
-    }),
-    PropTypes.shape({
-      initial: PropTypes.shape({
-        type: PropTypes.oneOf(['solid', 'translucent']),
-        color: PropTypes.string
-      }),
-      onScroll: PropTypes.shape({
-        type: PropTypes.oneOf(['solid', 'translucent']),
-        color: PropTypes.string
-      })
+      initial: PropTypes.string,
+      onScroll: PropTypes.string
     })
   ]),
   color: PropTypes.oneOfType([

@@ -37,10 +37,6 @@ export function getAccordingScrollValue(value, scrolled) {
     }
 
     if (value.onScroll && scrolled) {
-      if (value.onScroll.color) {
-        return value.onScroll.color
-      }
-
       return value.onScroll
     }
   }
