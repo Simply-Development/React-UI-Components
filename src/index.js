@@ -20,6 +20,7 @@ import Banner from './components/Banner'
 import Footer from './components/Footer'
 import Button from './components/Button'
 import CookieConsent from './components/CookieConsent'
+import SectionWithItem from './components/SectionWithItem'
 
 export default SimplyUIContext
 export {
@@ -28,5 +29,6 @@ export {
   Banner,
   Footer,
   Button,
-  CookieConsent
+  CookieConsent,
+  SectionWithItem
 }

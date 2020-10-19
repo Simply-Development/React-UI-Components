@@ -246,6 +246,49 @@ export default function Layout() {
 | color | String | Color of the the acceptance message. Default: undefined |
 | acceptance | String or Object | This it's the button in the right side, pass a string or an object with text, color an action to trigger when it's clicked. |
 
+### SectionWithItem
+
+Display something important, a project, notice or something.
+
+```js
+import { SectionWithItem } from 'simply-react-ui-components'
+
+export default function Layout() {
+  return (
+    <SectionWithItem
+      title={() => <img src={`${process.env.PUBLIC_URL}/oaxacarifa.jpg`} className="h-8 mb-5 mx-auto md:mx-0" alt="Oaxacarifa" />}
+      pitch="Marca 100% Oaxaqueña en busca de compartir el espiritu oaxaqueño"
+      position={{
+        small: 'center',
+        big: 'left'
+      }}
+      color={{
+        pitch: 'black',
+        description: '',
+        accent: '#e92f2d'
+      }}
+      description="Al adquirir productos Oaxacarifa, apoyas a deportistas y artistas urbanos a que sigan con su increíble trabajo."
+      action={{
+        label: 'Ir al sitio',
+        color: 'white',
+        rounded: true,
+      }}
+    />
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| position | String or Object | Set position of the main info, also gives you the capability to set a position for small and another for big screens. Default: "left" |
+| title | String or Function | Pass a string or a whole component to display the title of the section. Default: undefined |
+| pitch | String | Show the pitch of the section. |
+| description | String | Be more explicit about what you want to tell. Default: undefined |
+| color | String or Object | Set the color or the text of the section or be more specific setting an accent, title and normal color. Default: undefined |
+| action | Display a button to trigger and action or move your users to somewhere else, also you can pass an entire component to give them more interectivity. Default: undefined |
+
 ## License
 
 MIT © [Simply Development](https://github.com/Simply-Development)

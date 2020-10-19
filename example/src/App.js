@@ -15,22 +15,30 @@
  */
 
 import React from 'react'
-import { Header, SimplyUIProvider } from 'simply-react-ui-components'
+import { SectionWithItem, SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return <SimplyUIProvider>
-    <Header
-      title="Simply Development"
-      color="white"
-      position="fixed"
-      shadow={{
-        when: 'onScroll',
-        value: '0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)'
+    <SectionWithItem
+      title={() => <img src={`${process.env.PUBLIC_URL}/oaxacarifa.jpg`} className="h-8 mb-5 mx-auto md:mx-0" alt="Oaxacarifa" />}
+      pitch="Marca 100% Oaxaqueña en busca de compartir el espiritu oaxaqueño"
+      position={{
+        small: 'center',
+        big: 'left'
+      }}
+      color={{
+        pitch: 'black',
+        description: '',
+        accent: '#e92f2d'
+      }}
+      description="Al adquirir productos Oaxacarifa, apoyas a deportistas y artistas urbanos a que sigan con su increíble trabajo."
+      action={{
+        label: 'Ir al sitio',
+        color: 'white',
+        rounded: true,
       }}
     />
-    <div className="h-screen bg-black" />
-    <div className="h-screen" />
   </SimplyUIProvider>
 }
 
