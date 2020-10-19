@@ -288,6 +288,7 @@ export default function Layout() {
 | description | String | Be more explicit about what you want to tell. Default: undefined |
 | color | String or Object | Set the color or the text of the section or be more specific setting an accent, title and normal color. Default: undefined |
 | action | Display a button to trigger and action or move your users to somewhere else, also you can pass an entire component to give them more interectivity. Default: undefined |
+| item | Object | Display an item to ilustrate the section, by now image type it's only avaliable. Default: undefined |
 
 ## License
 

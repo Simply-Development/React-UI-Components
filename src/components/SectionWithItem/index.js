@@ -34,11 +34,13 @@ export default function SectionWithItem({
   item
 }) {
   const contentClass = classnames({
+    'py-10': true,
     'col-start-2 col-span-7': position === 'left' || position.small === 'left',
-    'md:col-start-2 md:col-span-6 lg:col-start-2 lg:col-span-5':
+    'md:col-start-2 md:col-span-5 md:order-none':
       position === 'left' || position.big === 'left',
-    'col-end-12 col-span-7': position === 'right' || position.small === 'right',
-    'md:col-end-12 md:col-span-6 lg:col-end-12 lg:col-span-5':
+    'col-end-12 col-span-7 order-1':
+      position === 'right' || position.small === 'right',
+    'md:col-end-12 md:col-span-6 lg:col-end-12 lg:col-span-5 md:order-1':
       position === 'right' || position.big === 'right',
     'col-start-2 col-span-10':
       position === 'center' || position.small === 'center',
@@ -83,9 +85,15 @@ export default function SectionWithItem({
     'text-right': position.small === 'right' || position === 'right',
     'md:text-right': position.big === 'right' || position === 'right'
   })
+  const imageClass = classnames({
+    'col-span-12 w-full': true,
+    'md:col-span-6':
+      ['left', 'right'].includes(position) ||
+      ['left', 'right'].includes(position.big)
+  })
 
   return (
-    <div className='md:h-screen py-20 md:py-0 grid grid-cols-12 items-center'>
+    <div className='grid grid-cols-12 items-center md:gap-10'>
       <div className={contentClass}>
         {title &&
           (typeof title === 'function' ? (
@@ -159,10 +167,8 @@ export default function SectionWithItem({
             </div>
           ))}
       </div>
-      {item && (
-        <div>
-
-        </div>
+      {item && item.type === 'image' && (
+        <img src={item.src} alt={item.alt} className={imageClass} />
       )}
     </div>
   )
@@ -178,8 +184,8 @@ SectionWithItem.propTypes = {
   position: PropTypes.oneOfType([
     PropTypes.oneOf(['left', 'right']),
     PropTypes.shape({
-      small: PropTypes.oneOf(['left', 'right']),
-      big: PropTypes.oneOf(['left', 'right'])
+      small: PropTypes.oneOf(['left', 'right', 'center']),
+      big: PropTypes.oneOf(['left', 'right', 'center'])
     })
   ]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -204,7 +210,9 @@ SectionWithItem.propTypes = {
   item: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({
-      type: PropTypes.oneOf(['image'])
+      type: PropTypes.oneOf(['image']),
+      src: PropTypes.string,
+      alt: PropTypes.string
     })
   ])
 }

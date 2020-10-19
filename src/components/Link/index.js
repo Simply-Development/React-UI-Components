@@ -43,7 +43,13 @@ export default function LinkComponent({
 
   if (Link === undefined || isExternalLink) {
     return (
-      <a href={href} className={className} style={style}>
+      <a
+        href={href}
+        className={className}
+        style={style}
+        target='_blank'
+        rel='noreferrer'
+      >
         {children}
       </a>
     )

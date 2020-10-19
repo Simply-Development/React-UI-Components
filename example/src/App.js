@@ -21,7 +21,7 @@ import 'tailwindcss/dist/tailwind.min.css';
 const App = () => {
   return <SimplyUIProvider>
     <SectionWithItem
-      title={() => <img src={`${process.env.PUBLIC_URL}/oaxacarifa.jpg`} className="h-8 mb-5 mx-auto md:mx-0" alt="Oaxacarifa" />}
+      title={() => <img src={`${process.env.PUBLIC_URL}/oaxacarifa_logo.jpg`} className="h-8 mb-5 mx-auto md:mx-0" alt="Oaxacarifa" />}
       pitch="Marca 100% Oaxaqueña en busca de compartir el espiritu oaxaqueño"
       position={{
         small: 'center',
@@ -37,6 +37,11 @@ const App = () => {
         label: 'Ir al sitio',
         color: 'white',
         rounded: true,
+      }}
+      item={{
+        type: 'image',
+        src: `${process.env.PUBLIC_URL}/oaxacarifa.jpg`,
+        alt: 'Oaxacarifa'
       }}
     />
   </SimplyUIProvider>
