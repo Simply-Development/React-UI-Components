@@ -31,8 +31,22 @@ export default function SectionWithItem({
   description,
   color,
   action,
-  item
+  item,
+  background
 }) {
+  const mainClass = classnames({
+    'grid grid-cols-12 md:h-screen items-center md:gap-10': true,
+    'bg-center':
+      background &&
+      background.type === 'image' &&
+      background.position === undefined,
+    'bg-no-repeat':
+      background &&
+      background.type === 'image' &&
+      background.repeat === undefined,
+    'bg-cover':
+      background && background.type === 'image' && background.size === undefined
+  })
   const contentClass = classnames({
     'py-10 md:py-0': true,
     'col-start-2 col-span-7': position === 'left' || position.small === 'left',
@@ -93,7 +107,33 @@ export default function SectionWithItem({
   })
 
   return (
-    <div className='grid grid-cols-12 md:h-screen items-center md:gap-10'>
+    <div
+      className={mainClass}
+      style={
+        typeof background === 'object'
+          ? background.type === 'linear-gradient'
+            ? {
+                background: Array.isArray(background.value)
+                  ? background.value
+                      .map((value) => `linear-gradient(${value})`)
+                      .join(',')
+                  : `linear-gradient(${background.value})`
+              }
+            : background.type === 'image'
+            ? {
+                backgroundImage: `url(${background.value})`,
+                backgroundPosition: background.position,
+                backgroundAttachment: background.attachment,
+                backgroundColor: background.color,
+                backgroundRepeat: background.repeat,
+                backgroundSize: background.size
+              }
+            : {}
+          : {
+              backgroundColor: background
+            }
+      }
+    >
       <div className={contentClass}>
         {title &&
           (typeof title === 'function' ? (
@@ -182,7 +222,8 @@ export default function SectionWithItem({
 SectionWithItem.defaultProps = {
   position: 'left',
   title: undefined,
-  description: undefined
+  description: undefined,
+  background: undefined
 }
 
 SectionWithItem.propTypes = {
@@ -219,5 +260,17 @@ SectionWithItem.propTypes = {
       src: PropTypes.string,
       alt: PropTypes.string
     })
-  ])
+  ]),
+  background: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      type: PropTypes.oneOf(['image', 'linear-gradient']).isRequired,
+      value: PropTypes.string.isRequired,
+      position: PropTypes.string,
+      attachment: PropTypes.string,
+      color: PropTypes.string,
+      repeat: PropTypes.string,
+      size: PropTypes.string
+    })
+  ]),
 }
