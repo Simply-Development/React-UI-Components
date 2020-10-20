@@ -86,7 +86,7 @@ export default function SectionWithItem({
     'md:text-right': position.big === 'right' || position === 'right'
   })
   const imageClass = classnames({
-    'col-span-12 w-full': true,
+    'col-span-12 w-full mb-10 md:mb-0': true,
     'md:col-span-6':
       ['left', 'right'].includes(position) ||
       ['left', 'right'].includes(position.big)
