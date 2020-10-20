@@ -34,7 +34,7 @@ export default function SectionWithItem({
   item
 }) {
   const contentClass = classnames({
-    'py-10': true,
+    'py-10 md:py-0': true,
     'col-start-2 col-span-7': position === 'left' || position.small === 'left',
     'md:col-start-2 md:col-span-5 md:order-none':
       position === 'left' || position.big === 'left',
@@ -93,7 +93,7 @@ export default function SectionWithItem({
   })
 
   return (
-    <div className='grid grid-cols-12 items-center md:gap-10'>
+    <div className='grid grid-cols-12 md:h-screen items-center md:gap-10'>
       <div className={contentClass}>
         {title &&
           (typeof title === 'function' ? (
@@ -168,7 +168,12 @@ export default function SectionWithItem({
           ))}
       </div>
       {item && item.type === 'image' && (
-        <img src={item.src} alt={item.alt} className={imageClass} />
+        <img
+          src={item.src}
+          alt={item.alt}
+          className={imageClass}
+          draggable='false'
+        />
       )}
     </div>
   )
