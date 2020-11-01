@@ -14,37 +14,36 @@
  * limitations under the License.
  */
 
-import React from 'react'
-import { SectionWithItem, SimplyUIProvider } from 'simply-react-ui-components'
+import React, { useState } from 'react'
+import { SimplyUIProvider, Header, Sidebar } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
-  return <SimplyUIProvider>
-    <SectionWithItem
-      title={() => <img src={`${process.env.PUBLIC_URL}/oaxacarifa_logo.jpg`} className="h-8 mb-5 mx-auto md:mx-0" alt="Oaxacarifa" />}
-      pitch="Marca 100% Oaxaqueña en busca de compartir el espiritu oaxaqueño"
-      position={{
-        small: 'center',
-        big: 'left'
-      }}
-      color={{
-        pitch: 'black',
-        description: '',
-        accent: '#e92f2d'
-      }}
-      description="Al adquirir productos Oaxacarifa, apoyas a deportistas y artistas urbanos a que sigan con su increíble trabajo."
-      action={{
-        label: 'Ir al sitio',
-        color: 'white',
-        rounded: true,
-      }}
-      item={{
-        type: 'image',
-        src: `${process.env.PUBLIC_URL}/oaxacarifa.jpg`,
-        alt: 'Oaxacarifa'
-      }}
-    />
-  </SimplyUIProvider>
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  return (
+    <SimplyUIProvider>
+      <Header
+        title="Simply Development"
+        color="white"
+        sidebarButton
+        position="fixed"
+        setSidebarState={setIsSidebarOpen}
+        sidebarState={isSidebarOpen}
+      />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        position="fixed"
+        background="black"
+        color="white"
+        items={[
+          {
+            label: 'Services'
+          }
+        ]}
+      />
+    </SimplyUIProvider>
+  )
 }
 
 export default App

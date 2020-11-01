@@ -117,6 +117,7 @@ export default function Header({
     'py-1': !sidebarButton && hideItemsOnSmallDevices && scrolled
   })
   const sidebarButtonClass = classNames({
+    'cursor-pointer': true,
     'my-3': !scrolled,
     'my-2': scrolled,
     'md:hidden':

@@ -21,6 +21,7 @@ import Footer from './components/Footer'
 import Button from './components/Button'
 import CookieConsent from './components/CookieConsent'
 import SectionWithItem from './components/SectionWithItem'
+import Sidebar from './components/Sidebar'
 
 export default SimplyUIContext
 export {
@@ -30,5 +31,6 @@ export {
   Footer,
   Button,
   CookieConsent,
-  SectionWithItem
+  SectionWithItem,
+  Sidebar
 }

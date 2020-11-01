@@ -1,6 +1,6 @@
 {
   "name": "simply-react-ui-components",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A Simple and Minimalist React Components Library",
   "author": "Simply Development",
   "contributors": [
@@ -10,7 +10,7 @@
     }
   ],
   "license": "MIT",
-  "repository": "Simply-Development/simply-react-ui-components",
+  "repository": "Simply-Development/React-UI-Components",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",

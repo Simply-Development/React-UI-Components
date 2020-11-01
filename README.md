@@ -121,9 +121,46 @@ export default function Layout() {
 | cartCount | Number | This allow you to display a count of the items in the cart. Default: undefined |
 | sidebarState | Boolean | Sync internal state with external. Default: undefined |
 
+### Sidebar
+
+The Sidebar component has the necessary to create a simple menu and / or display header items on small devices.
+
+```js
+import { useState } from 'react'
+import { Sidebar } from 'simply-react-ui-components'
+
+export default function Layout() {
+  const [isSidebarOpen] = useState(false)
+
+  return (
+    <Sidebar
+      isOpen={isSidebarOpen}
+      position="fixed"
+      items={[
+        {
+          label: 'Services'
+        }
+      ]}
+    />
+  )
+}
+```
+
+#### Properties
+
+| Name | Type | Description |
+| - | - | - |
+| isOpen | Boolean | This set if sidebar should be visible in the case that position is fixed or absolute. Default: true |
+| background | String | Set the Sidebar backgrund color. Default: undefined |
+| shadowColor | String | If your page background it's black by example, you can use this to modify the current shadow-box property of the Sidebar to achieve a better slide effect when sidebar switch between show and hide. Default: undefined |
+| position | String | Set the sidebar position, like fixed, absolute or relative. Default: relative |
+| close | Function | This it's usefull to ensure that sidebar is going to be closed after an item it's clicked. Default: () => {} |
+| items | Array | An array of object which is going to be rendered on sidebar. Default: [] |
+| color | String | Here you can set the color of the items on the Sidebar. Default: undefined |
+
 ### Footer
 
-The Footer componnent has the necessary to make your site comfortable to your users.
+The Footer component has the necessary to make your site comfortable to your users.
 
 ```js
 import { Footer } from 'simply-react-ui-components'

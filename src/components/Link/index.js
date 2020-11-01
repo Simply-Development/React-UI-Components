@@ -30,7 +30,8 @@ export default function LinkComponent({
   href,
   className,
   style,
-  as
+  as,
+  onClick
 }) {
   const { Link, library } = useContext(SimplyUIContext)
   const [isExternalLink, setIsExternalLink] = useState(false)
@@ -49,6 +50,7 @@ export default function LinkComponent({
         style={style}
         target='_blank'
         rel='noreferrer'
+        onClick={onClick}
       >
         {children}
       </a>
@@ -58,7 +60,7 @@ export default function LinkComponent({
     case 'nextjs':
       return (
         <Link href={href} as={as}>
-          <a className={className} style={style}>
+          <a className={className} style={style} onClick={onClick}>
             {children}
           </a>
         </Link>
@@ -74,12 +76,14 @@ export default function LinkComponent({
 
 LinkComponent.defaultProps = {
   className: undefined,
-  style: undefined
+  style: undefined,
+  onClick: () => {}
 }
 
 LinkComponent.propTypes = {
   children: PropTypes.node.isRequired,
   href: PropTypes.string.isRequired,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  onClick: PropTypes.func
 }

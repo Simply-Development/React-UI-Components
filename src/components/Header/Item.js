@@ -23,12 +23,7 @@ import { getAccordingScrollValue } from '../../lib/scroll'
 /**
  * Item of the Header, allow to use Link and a simple onClick action
  *
- * @param label String label to show
- * @param href Url to move into the application
- * @param onClick Function
- * @param scrolled To set padding size
- * @param color Item text color
- * @param button Config for Item to look like button
+ * @component
  * */
 export default function HeaderItem({
   label,
@@ -131,7 +126,7 @@ HeaderItem.propTypes = {
   as: PropTypes.string,
   onClick: PropTypes.func,
   scrolled: PropTypes.bool,
-  color: PropTypes.oneOf([
+  color: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
       initial: PropTypes.string,
