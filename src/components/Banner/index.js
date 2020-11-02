@@ -33,7 +33,7 @@ export default function Banner({
   item
 }) {
   const mainContainer = classnames({
-    'grid grid-cols-12 h-screen items-center': true,
+    'grid grid-cols-12 md:h-screen items-center md:gap-10': true,
     'bg-center':
       background &&
       background.type === 'image' &&
@@ -46,7 +46,7 @@ export default function Banner({
       background && background.type === 'image' && background.size === undefined
   })
   const contentClass = classnames({
-    'col-start-2 col-span-7':
+    'col-start-2 col-span-7 py-10 md:py-0':
       contentPosition === 'left' || contentPosition.small === 'left',
     'md:col-start-2 md:col-span-6 lg:col-start-2 lg:col-span-5':
       contentPosition === 'left' ||
@@ -63,7 +63,7 @@ export default function Banner({
   })
   const imageClass = classnames({
     'col-span-12 w-full mb-10 md:mb-0': true,
-    'md:col-span-6':
+    'md:col-span-5 lg:col-span-6':
       ['left', 'right'].includes(contentPosition) ||
       ['left', 'right'].includes(contentPosition.big) ||
       contentPosition.big === undefined
