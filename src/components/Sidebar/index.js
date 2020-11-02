@@ -83,12 +83,14 @@ Sidebar.propTypes = {
   shadowColor: PropTypes.string,
   position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
   close: PropTypes.func,
-  items: PropTypes.shape({
-    href: PropTypes.string,
-    as: PropTypes.string,
-    onClick: PropTypes.func,
-    label: PropTypes.string.isRequired,
-    closeSidebar: PropTypes.func
-  }),
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      href: PropTypes.string,
+      as: PropTypes.string,
+      onClick: PropTypes.func,
+      label: PropTypes.string.isRequired,
+      closeSidebar: PropTypes.func
+    })
+  ),
   color: PropTypes.string
 }
