@@ -46,7 +46,8 @@ export default function Banner({
       background && background.type === 'image' && background.size === undefined
   })
   const contentClass = classnames({
-    'col-start-2 col-span-7 py-10 md:py-0':
+    'py-10 md:py-0 mt-16 md:mt-0': true,
+    'col-start-2 col-span-7':
       contentPosition === 'left' || contentPosition.small === 'left',
     'md:col-start-2 md:col-span-6 lg:col-start-2 lg:col-span-5':
       contentPosition === 'left' ||
