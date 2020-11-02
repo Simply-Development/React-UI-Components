@@ -30,7 +30,7 @@ export default function Banner({
   color,
   message,
   button,
-  image
+  item
 }) {
   const mainContainer = classnames({
     'grid grid-cols-12 h-screen items-center': true,
@@ -61,14 +61,11 @@ export default function Banner({
     'md:col-span-6 md:col-start-4 lg:col-start-5 lg:col-span-4':
       contentPosition === 'center' || contentPosition.big === 'center'
   })
-  const rightContentClass = classnames({
-    'hidden md:block md:col-start-9 md:col-span-3 lg:col-start-8 lg:col-span-4':
-      contentPosition === 'left' || contentPosition.small === 'left',
-    'hidden md:block md:col-start-2':
-      contentPosition === 'right' || contentPosition.small === 'right',
-    hidden: contentPosition === 'center' || contentPosition.small === 'center',
-    'md:hidden':
-      contentPosition === 'center' || contentPosition.big === 'center'
+  const imageClass = classnames({
+    'col-span-12 w-full mb-10 md:mb-0': true,
+    'md:col-span-6':
+      ['left', 'right'].includes(position) ||
+      ['left', 'right'].includes(position.big)
   })
   const justifyContainerClass = classnames({
     flex: true,
@@ -184,15 +181,14 @@ export default function Banner({
           </div>
         )}
       </div>
-      <div className={rightContentClass}>
-        {typeof image === 'object' ? (
-          <img src={image.source} alt={image.alt} className={image.className} />
-        ) : typeof image === 'function' ? (
-          image()
-        ) : (
-          image && <img src={image} />
-        )}
-      </div>
+      {item && item.type === 'image' && (
+        <img
+          src={item.src}
+          alt={item.alt}
+          className={imageClass}
+          draggable='false'
+        />
+      )}
     </div>
   )
 }
@@ -234,15 +230,12 @@ Banner.propTypes = {
     href: PropTypes.string,
     onClick: PropTypes.func
   }),
-  image: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      source: PropTypes.string.isRequired,
-      alt: PropTypes.string,
-      className: PropTypes.string
-    }),
-    PropTypes.func
-  ])
+  item: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string,
+    className: PropTypes.string,
+    type: 'image'
+  })
 }
 
 Banner.defaultProps = {
@@ -250,5 +243,5 @@ Banner.defaultProps = {
   background: undefined,
   message: undefined,
   button: undefined,
-  image: undefined
+  item: undefined
 }

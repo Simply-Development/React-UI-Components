@@ -247,7 +247,7 @@ export default function Layout() {
 | title | String | Title of the banner, this is were you begin your pitch. |
 | message | String | Here you can complete your pitch. Default: undefined |
 | button | String or object | Call to action, use this to move your users to another page or execute some action. default: undefined |
-| image | String, object or function | Complete your banner putting some image of your products or pass a custom component to fully customize it. Default: undefined |
+| item | Object | Complete your banner putting some image of your products. Default: undefined |
 
 ### CookieConsent
 
