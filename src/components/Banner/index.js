@@ -64,8 +64,8 @@ export default function Banner({
   const imageClass = classnames({
     'col-span-12 w-full mb-10 md:mb-0': true,
     'md:col-span-6':
-      ['left', 'right'].includes(position) ||
-      ['left', 'right'].includes(position.big)
+      ['left', 'right'].includes(contentPosition) ||
+      ['left', 'right'].includes(contentPosition.big)
   })
   const justifyContainerClass = classnames({
     flex: true,
