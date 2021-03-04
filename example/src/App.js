@@ -15,13 +15,31 @@
  */
 
 import React from 'react'
-import { SimplyUIProvider, Banner, Button } from 'simply-react-ui-components'
+import { SimplyUIProvider, Footer } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return (
     <SimplyUIProvider>
-      
+      <Footer
+        brand={{
+          short: 'Domit Express',
+          long: 'R&J Company'
+        }}
+        color={{
+          title: '#D31418',
+        }}
+        items={[
+          {
+            label: 'Términos y Condiciones',
+            href: '/terms-and-conditions'
+          }
+        ]}
+        social={{
+          instagram: 'https://www.instagram.com/domitexpress/',
+          facebook: 'https://www.facebook.com/domit.ruizjimenez.3'
+        }}
+      />
     </SimplyUIProvider>
   )
 }

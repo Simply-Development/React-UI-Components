@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,14 @@ import {
 } from 'react-icons/fa'
 import Link from '../Link'
 
-export default function Footer({ brand, background, color, items, social }) {
+export default function Footer({
+  brand,
+  background,
+  color,
+  items,
+  social,
+  sendLove
+}) {
   return (
     <footer
       className='grid grid-cols-12 py-5'
@@ -319,6 +326,17 @@ export default function Footer({ brand, background, color, items, social }) {
               )}
             </div>
           )}
+          <div className='w-full justify-center flex mt-3'>
+            <a
+              className='text-gray-600 text-sm'
+              href='https://simply-development.com'
+              // eslint-disable-next-line react/jsx-no-target-blank
+              target='_blank'
+            >
+              Developed with ❤️ by{' '}
+              <span className='text-red-500'>Simply Development</span>
+            </a>
+          </div>
         </div>
       </div>
       <style jsx='true'>{`
@@ -342,7 +360,8 @@ Footer.defaultProps = {
   background: undefined,
   color: undefined,
   items: [],
-  social: undefined
+  social: undefined,
+  sendLove: true
 }
 
 Footer.propTypes = {
@@ -376,5 +395,6 @@ Footer.propTypes = {
     twitter: PropTypes.string,
     linkedin: PropTypes.string,
     github: PropTypes.string
-  })
+  }),
+  sendLove: PropTypes.bool
 }

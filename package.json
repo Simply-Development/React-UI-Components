@@ -1,7 +1,14 @@
 {
   "name": "simply-react-ui-components",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "A Simple and Minimalist React Components Library",
+  "keywords": [
+    "reactjs",
+    "components",
+    "library",
+    "javascript",
+    "ui"
+  ],
   "author": {
     "name": "Simply Development",
     "email": "hello@simply-development.com",
