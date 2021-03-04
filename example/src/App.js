@@ -14,34 +14,14 @@
  * limitations under the License.
  */
 
-import React, { useState } from 'react'
-import { SimplyUIProvider, Header, Sidebar } from 'simply-react-ui-components'
+import React from 'react'
+import { SimplyUIProvider, Banner, Button } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
   return (
     <SimplyUIProvider>
-      <Header
-        title="Simply Development"
-        color="white"
-        sidebarButton
-        position="fixed"
-        setSidebarState={setIsSidebarOpen}
-        sidebarState={isSidebarOpen}
-      />
-      <Sidebar
-        isOpen={isSidebarOpen}
-        position="fixed"
-        background="black"
-        color="white"
-        items={[
-          {
-            label: 'Services'
-          }
-        ]}
-      />
+      
     </SimplyUIProvider>
   )
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import Button from '../Button'
 /**
  * This component is perfect to start your page and show
  * what you have.
+ *
+ * @component
  */
 export default function Banner({
   background,
@@ -29,7 +31,7 @@ export default function Banner({
   contentPosition,
   color,
   message,
-  button,
+  action,
   item
 }) {
   const mainContainer = classnames({
@@ -63,7 +65,8 @@ export default function Banner({
       contentPosition === 'center' || contentPosition.big === 'center'
   })
   const imageClass = classnames({
-    'col-span-12 w-full mb-10 md:mb-0': true,
+    'col-span-12 mb-10 md:mb-0 mx-auto': true,
+    [item.className]: true,
     'md:col-span-5 lg:col-span-6':
       ['left', 'right'].includes(contentPosition) ||
       ['left', 'right'].includes(contentPosition.big) ||
@@ -168,20 +171,23 @@ export default function Banner({
             </p>
           </Fragment>
         )}
-        {button && (
-          <div className={justifyContainerClass}>
-            <Button
-              background={color && (color.accent || color)}
-              color={button.color}
-              rounded={button.rounded}
-              className={buttonClass}
-              href={button.href}
-              onClick={button.onClick}
-            >
-              {button.text}
-            </Button>
-          </div>
-        )}
+        {action &&
+          (typeof action === 'object' ? (
+            <div className={justifyContainerClass}>
+              <Button
+                background={color && (color.accent || color)}
+                color={action.color}
+                rounded={action.rounded}
+                className={buttonClass}
+                href={action.href}
+                onClick={action.onClick}
+              >
+                {action.text}
+              </Button>
+            </div>
+          ) : (
+            action()
+          ))}
       </div>
       {item && item.type === 'image' && (
         <img
@@ -189,6 +195,7 @@ export default function Banner({
           alt={item.alt}
           className={imageClass}
           draggable='false'
+          style={item.style}
         />
       )}
     </div>
@@ -225,18 +232,21 @@ Banner.propTypes = {
   ]),
   title: PropTypes.string.isRequired,
   message: PropTypes.string,
-  button: PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
-    color: PropTypes.string,
-    href: PropTypes.string,
-    onClick: PropTypes.func
-  }),
+  action: PropTypes.oneOfType([
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
+      color: PropTypes.string,
+      href: PropTypes.string,
+      onClick: PropTypes.func
+    }),
+    PropTypes.func
+  ]),
   item: PropTypes.shape({
     src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
+    alt: PropTypes.string.isRequired,
     className: PropTypes.string,
-    type: 'image'
+    type: PropTypes.oneOf(['image'])
   })
 }
 
@@ -244,6 +254,6 @@ Banner.defaultProps = {
   contentPosition: 'left',
   background: undefined,
   message: undefined,
-  button: undefined,
+  action: undefined,
   item: undefined
 }

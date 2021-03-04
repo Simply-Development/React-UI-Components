@@ -1,12 +1,17 @@
 {
   "name": "simply-react-ui-components",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "A Simple and Minimalist React Components Library",
-  "author": "Simply Development",
+  "author": {
+    "name": "Simply Development",
+    "email": "hello@simply-development.com",
+    "url": "https://simply-development.com"
+  },
   "contributors": [
     {
       "name": "Jorge Castillo",
-      "email": "schorts99@gmail.com"
+      "email": "j@simply-development.com",
+      "url": "https://simply-development.com"
     }
   ],
   "license": "MIT",
