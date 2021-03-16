@@ -22,6 +22,7 @@ import Button from './components/Button'
 import CookieConsent from './components/CookieConsent'
 import SectionWithItem from './components/SectionWithItem'
 import Sidebar from './components/Sidebar'
+import Input from './components/Input'
 
 export default SimplyUIContext
 export {
@@ -32,5 +33,6 @@ export {
   Button,
   CookieConsent,
   SectionWithItem,
-  Sidebar
+  Sidebar,
+  Input
 }
