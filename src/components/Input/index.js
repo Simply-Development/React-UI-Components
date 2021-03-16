@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import React from 'react'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
 
 export default function Input({
   label,
@@ -37,56 +37,54 @@ export default function Input({
   min,
   max,
   inlineActionLabel,
-  color,
+  color
 }) {
-  const
-    labelClass = classnames({
-      'text-sm w-full': true,
-      'text-gray-600': !error && !color.label,
-      'text-red-600': error && !color.error,
-    });
+  const labelClass = classnames({
+    'text-sm w-full': true,
+    'text-gray-600': !error && !color.label,
+    'text-red-600': error && !color.error
+  })
   const inputClass = classnames({
     'w-full px-3 py-2': true,
     'text-black': !color.value,
-    'mt-2 border': border === 'full',
+    'mt-2 border rounded': border === 'full',
     'outline-none bg-transparent border-b': border === 'underline',
     'text-lg': scale === 1,
     'text-xl': scale === 2,
     'text-2xl': scale === 3,
     'border-gray-600': !error && !color.label,
     'mb-4': !error,
-    'border-red-600': error && !color.error,
-  });
+    'border-red-600': error && !color.error
+  })
   const errorClass = classnames({
     'mb-4 mt-2': true,
-    'text-red-600': !color.error,
-  });
+    'text-red-600': !color.error
+  })
 
   return (
     <label
       htmlFor={name}
       className={labelClass}
-      style={color.label && {color: color.label}}
+      style={color.label && { color: color.label }}
     >
-      {label && (
-        inlineActionLabel ? (
-          <div className="flex items-center justify-between">
-            <p>
-              {required ? `*${label}` : label}
-            </p>
+      {label &&
+        (inlineActionLabel ? (
+          <div className='flex items-center justify-between'>
+            <p>{required ? `*${label}` : label}</p>
             <button
               onClick={inlineActionLabel.onClick}
               className={!color.accent && 'text-red-600'}
-              style={color.accent && {color: color.accent}}
-              type="button"
+              style={color.accent && { color: color.accent }}
+              type='button'
             >
               {inlineActionLabel.label}
             </button>
           </div>
+        ) : required ? (
+          `*${label}`
         ) : (
-          required ? `*${label}` : label
-        )
-      )}
+          label
+        ))}
       {rows && rows > 1 ? (
         <textarea
           className={inputClass}
@@ -100,11 +98,13 @@ export default function Input({
           rows={rows}
           value={value}
           onChange={onChange}
-          style={Object.assign(
-            {},
-            color.label && {borderColor: color.label},
-            color.value && {color: color.value}),
-            color.input && {backgroundColor: color.input}
+          style={
+            (Object.assign(
+              {},
+              color.label && { borderColor: color.label },
+              color.value && { color: color.value }
+            ),
+            color.input && { backgroundColor: color.input })
           }
         />
       ) : (
@@ -122,24 +122,23 @@ export default function Input({
           min={min}
           max={max}
           onChange={onChange}
-          style={Object.assign(
-            {},
-            color.label && {borderColor: color.label},
-            color.value && {color: color.value}),
-            color.input && {backgroundColor: color.input}
+          style={
+            (Object.assign(
+              {},
+              color.label && { borderColor: color.label },
+              color.value && { color: color.value }
+            ),
+            color.input && { backgroundColor: color.input })
           }
         />
       )}
       {error && (
-        <p
-          className={errorClass}
-          style={color.error && {color: color.error}}
-        >
+        <p className={errorClass} style={color.error && { color: color.error }}>
           {error}
         </p>
       )}
     </label>
-  );
+  )
 }
 
 Input.defaultProps = {
@@ -159,7 +158,7 @@ Input.defaultProps = {
   max: 10000,
   inlineActionLabel: null,
   color: {}
-};
+}
 
 Input.propTypes = {
   label: PropTypes.string,
@@ -181,12 +180,12 @@ Input.propTypes = {
   max: PropTypes.number,
   inlineActionLabel: PropTypes.shape({
     label: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired
   }),
   color: PropTypes.shape({
     label: PropTypes.string,
     value: PropTypes.string,
     error: PropTypes.string,
     input: PropTypes.string
-  }),
-};
+  })
+}
