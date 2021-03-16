@@ -15,7 +15,7 @@
  */
 
 import React from 'react'
-import { SimplyUIProvider, Input } from 'simply-react-ui-components'
+import { SimplyUIProvider } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {

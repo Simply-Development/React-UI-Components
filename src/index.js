@@ -23,6 +23,7 @@ import CookieConsent from './components/CookieConsent'
 import SectionWithItem from './components/SectionWithItem'
 import Sidebar from './components/Sidebar'
 import Input from './components/Input'
+import InputSelect from './components/Input/Select'
 
 export default SimplyUIContext
 export {
@@ -34,5 +35,6 @@ export {
   CookieConsent,
   SectionWithItem,
   Sidebar,
-  Input
+  Input,
+  InputSelect
 }
