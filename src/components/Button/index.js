@@ -21,7 +21,7 @@ import PropTypes from 'prop-types'
 
 /**
  * Button with neccesary config to work as a Link or just a Button
- * 
+ *
  * @component
  */
 export default function Button({
@@ -31,7 +31,8 @@ export default function Button({
   background,
   color,
   rounded,
-  className
+  className,
+  submit
 }) {
   const mainContainerClass = classnames({
     'px-5 py-3 font-bold uppercase w-full md:w-auto': true,
@@ -58,7 +59,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      type='button'
+      type={submit ? 'submit' : 'button'}
       className={mainContainerClass}
       style={{
         backgroundColor: background,
@@ -77,6 +78,7 @@ Button.propTypes = {
   href: PropTypes.string,
   background: PropTypes.string,
   color: PropTypes.string,
+  submit: PropTypes.bool
 }
 
 Button.defaultProps = {
@@ -86,4 +88,5 @@ Button.defaultProps = {
   background: undefined,
   color: undefined,
   href: undefined,
+  submit: false
 }
