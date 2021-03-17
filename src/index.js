@@ -24,6 +24,7 @@ import SectionWithItem from './components/SectionWithItem'
 import Sidebar from './components/Sidebar'
 import Input from './components/Input'
 import InputSelect from './components/Input/Select'
+import InputSwitch from './components/Input/Switch'
 
 export default SimplyUIContext
 export {
@@ -36,5 +37,6 @@ export {
   SectionWithItem,
   Sidebar,
   Input,
-  InputSelect
+  InputSelect,
+  InputSwitch
 }

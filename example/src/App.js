@@ -21,7 +21,6 @@ import 'tailwindcss/dist/tailwind.min.css';
 const App = () => {
   return (
     <SimplyUIProvider>
-      
     </SimplyUIProvider>
   )
 }

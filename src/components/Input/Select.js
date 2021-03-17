@@ -48,55 +48,14 @@ export default function SelectInput({
     'text-red-600': !color.error
   })
 
-  if (label) {
-    return (
-      <label
-        className={labelClass}
-        style={color.label && { color: color.label }}
-      >
-        {required && '*'}
-        {label}
-        <select
-          required={required}
-          disabled={disabled}
-          name={name}
-          value={!value ? 'null' : value}
-          onChange={onChange}
-          className={selectClass}
-          style={Object.assign(
-            {},
-            color.label && { borderColor: color.label },
-            color.value && { color: color.value }
-          )}
-        >
-          {options.map((option) => (
-            <option
-              key={!option.value ? 'null' : option.value}
-              value={!option.value ? 'null' : option.value}
-            >
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {error && (
-          <p
-            className={errorClass}
-            style={color.error && { color: color.error }}
-          >
-            {error}
-          </p>
-        )}
-      </label>
-    )
-  }
-
   return (
-    <>
+    <label className={labelClass} style={color.label && { color: color.label }}>
+      {label && `${required ? '*' : ''}${label}`}
       <select
         required={required}
-        name={name}
-        value={value}
         disabled={disabled}
+        name={name}
+        value={!value ? 'null' : value}
         onChange={onChange}
         className={selectClass}
         style={Object.assign(
@@ -119,7 +78,7 @@ export default function SelectInput({
           {error}
         </p>
       )}
-    </>
+    </label>
   )
 }
 
