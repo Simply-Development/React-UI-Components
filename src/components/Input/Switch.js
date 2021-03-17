@@ -18,15 +18,9 @@ import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
-export default function SwitchInput({
-  label,
-  required,
-  color,
-  onChange,
-  checked
-}) {
+export default function SwitchInput({ label, color, onChange, checked }) {
   const labelClass = classnames({
-    'text-sm w-full flex items-center justify-between': true,
+    'text-sm w-full flex items-center justify-between mb-4': true,
     'text-gray-600': !color.label
   })
   const dotContainerClass = classnames({
@@ -40,7 +34,7 @@ export default function SwitchInput({
 
   return (
     <label className={labelClass} style={color.label && { color: color.label }}>
-      {label && `${required ? '*' : ''}${label}`}
+      {label && label}
       <div className='relative'>
         <input
           type='checkbox'
@@ -83,14 +77,12 @@ export default function SwitchInput({
 }
 
 SwitchInput.defaultProps = {
-  required: false,
   label: null,
   color: {}
 }
 
 SwitchInput.propTypes = {
   label: PropTypes.string,
-  required: PropTypes.bool,
   color: PropTypes.shape({
     label: PropTypes.string,
     input: PropTypes.shape({
