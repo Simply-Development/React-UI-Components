@@ -29,6 +29,16 @@ export default function SelectInput({
   border,
   color
 }) {
+  function _onChange(event) {
+    onChange({
+      ...event,
+      target: {
+        ...event.target,
+        value: event.target.value === 'null' ? null : event.target.value
+      }
+    })
+  }
+
   const labelClass = classnames({
     'text-sm w-full': true,
     'text-gray-600': !color.label
@@ -48,7 +58,7 @@ export default function SelectInput({
         disabled={disabled}
         name={name}
         value={!value ? 'null' : value}
-        onChange={onChange}
+        onChange={_onChange}
         className={selectClass}
         style={Object.assign(
           {},
