@@ -23,3 +23,10 @@ yarn-error.log*
 
 .fake
 .ionide
+
+# Visual Studio Code config
+.vscode
+
+# WebStorm config
+.idea
+.run

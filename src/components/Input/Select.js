@@ -27,17 +27,25 @@ export default function SelectInput({
   label,
   required,
   border,
-  color
+  color,
+  error
 }) {
   const labelClass = classnames({
     'text-sm w-full': true,
-    'text-gray-600': !color.label
+    'text-gray-600': !error && !color.label,
+    'text-red-600': error && !color.error
   })
   const selectClass = classnames({
-    'bg-white text-black rounded p-2 text-lg block w-full mb-4': true,
+    'bg-white text-black rounded p-2 text-lg block w-full': true,
     border: border,
-    'border-gray-600': !color.label,
-    'mt-2': label
+    'border-gray-600': !error && !color.label,
+    'border-red-600': error && !color.error,
+    'mt-2': label,
+    'mb-4': !error
+  })
+  const errorClass = classnames({
+    'mb-4 mt-2': true,
+    'text-red-600': !color.error
   })
 
   return (
@@ -65,6 +73,11 @@ export default function SelectInput({
           </option>
         ))}
       </select>
+      {error && (
+        <p className={errorClass} style={color.error && { color: color.error }}>
+          {error}
+        </p>
+      )}
     </label>
   )
 }
@@ -74,7 +87,8 @@ SelectInput.defaultProps = {
   label: null,
   border: true,
   color: {},
-  value: null
+  value: null,
+  error: null
 }
 
 SelectInput.propTypes = {
@@ -95,5 +109,6 @@ SelectInput.propTypes = {
     value: PropTypes.string,
     error: PropTypes.string,
     input: PropTypes.string
-  })
+  }),
+  error: PropTypes.string
 }
