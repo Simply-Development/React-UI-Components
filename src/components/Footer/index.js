@@ -326,17 +326,19 @@ export default function Footer({
               )}
             </div>
           )}
-          <div className='w-full justify-center flex mt-3'>
-            <a
-              className='text-gray-600 text-sm'
-              href='https://simply-development.com'
-              // eslint-disable-next-line react/jsx-no-target-blank
-              target='_blank'
-            >
-              Developed with ❤️ by{' '}
-              <span className='text-red-500'>Simply Development</span>
-            </a>
-          </div>
+          {sendLove && (
+            <div className='w-full justify-center flex mt-3'>
+              <a
+                className='text-gray-600 text-sm'
+                href='https://simply-development.com'
+                // eslint-disable-next-line react/jsx-no-target-blank
+                target='_blank'
+              >
+                Developed with ❤️ by{' '}
+                <span className='text-red-500'>Simply Development</span>
+              </a>
+            </div>
+          )}
         </div>
       </div>
       <style jsx='true'>{`

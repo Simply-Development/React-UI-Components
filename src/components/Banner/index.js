@@ -64,14 +64,18 @@ export default function Banner({
     'md:col-span-6 md:col-start-4 lg:col-start-5 lg:col-span-4':
       contentPosition === 'center' || contentPosition.big === 'center'
   })
-  const imageClass = classnames({
-    'col-span-12 mb-10 md:mb-0 mx-auto': true,
-    [item.className]: true,
-    'md:col-span-5 lg:col-span-6':
-      ['left', 'right'].includes(contentPosition) ||
-      ['left', 'right'].includes(contentPosition.big) ||
-      contentPosition.big === undefined
-  })
+  const imageClass = classnames(
+    {
+      'col-span-12 mb-10 md:mb-0 mx-auto': true,
+      'md:col-span-5 lg:col-span-6':
+        ['left', 'right'].includes(contentPosition) ||
+        ['left', 'right'].includes(contentPosition.big) ||
+        contentPosition.big === undefined
+    },
+    item && {
+      [item.className]: true
+    }
+  )
   const justifyContainerClass = classnames({
     flex: true,
     'justify-end':

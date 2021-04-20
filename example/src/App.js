@@ -1,11 +1,11 @@
 import React from 'react'
-import { SimplyUIProvider, Header } from 'simply-react-ui-components'
+import { SimplyUIProvider, Banner } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
   return (
     <SimplyUIProvider>
-      <Header
+      <Banner
         title="Simply Development"
       />
     </SimplyUIProvider>
