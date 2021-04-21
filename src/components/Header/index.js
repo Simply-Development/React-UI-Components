@@ -131,8 +131,8 @@ export default function Header({
       }}
     >
       <div className='col-start-2 col-span-10'>
-        <div className='grid items-center'>
-          <div className='col-start-1'>
+        <div className='grid items-center grid-cols-12'>
+          <div className='col-start-1 col-span-12 md:col-start-1 md:col-span-5 lg:col-start-1 lg:col-span-4 xl:col-start-1 xl:col-span-3 text-center md:text-left'>
             {typeof title === 'function' ? (
               title({ scrolled })
             ) : (
@@ -156,7 +156,7 @@ export default function Header({
               </Link>
             )}
           </div>
-          <div className='col-end-12' style={{ justifySelf: 'flex-end' }}>
+          <div>
             <div className='grid grid-flow-col col-gap-10 lg:col-gap-12 items-center'>
               {items.map((item, index) => (
                 <Item
@@ -330,7 +330,31 @@ Header.propTypes = {
             })
           ])
         })
-      ])
+      ]),
+      items: PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            href: PropTypes.string,
+            as: PropTypes.string,
+            onClick: PropTypes.func,
+            items: PropTypes.arrayOf(
+              PropTypes.shape({
+                label: PropTypes.string.isRequired,
+                href: PropTypes.string,
+                as: PropTypes.string,
+                onClick: PropTypes.func
+              })
+            )
+          }),
+          PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            href: PropTypes.string,
+            as: PropTypes.string,
+            onClick: PropTypes.func
+          })
+        ])
+      )
     })
   ),
   sidebarButton: PropTypes.oneOfType([

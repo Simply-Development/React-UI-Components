@@ -1,0 +1,8 @@
+.dropdown ul {
+  display: none;
+  position: absolute;
+}
+
+.dropdown:hover ul {
+  display: block
+}

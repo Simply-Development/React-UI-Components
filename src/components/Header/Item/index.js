@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,12 @@
  */
 
 import React from 'react'
-import Link from '../Link'
+import Link from '../../Link'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { getAccordingScrollValue } from '../../lib/scroll'
+import { getAccordingScrollValue } from '../../../lib/scroll'
+import styles from '../../../styles.module.css'
+import Content from './Content'
 
 /**
  * Item of the Header, allow to use Link and a simple onClick action
@@ -33,82 +35,51 @@ export default function HeaderItem({
   color,
   button,
   hideOnSmallDevice,
-  as
+  as,
+  items
 }) {
+  const containerClass = classNames({
+    [styles.dropdown]: items && !button
+  })
   const itemClass = classNames({
     'text-sm cursor-pointer': true,
     'py-3 md:py-4': !scrolled,
     'py-2 md:py-3': scrolled,
-    'text-gray-600': !color,
+    'text-gray-800': !color,
     'hidden md:block': hideOnSmallDevice
-  })
-  const buttonClass = classNames({
-    'text-sm px-6 py-2': true,
-    'rounded-full': typeof button === 'object' && button.rounded,
-    'bg-black':
-      typeof button === 'object' ? button.background === undefined : true,
-    'text-white': typeof button === 'object' ? button.color === undefined : true
   })
 
   if (href) {
     return (
-      <Link
-        href={href}
-        as={as}
+      <div className={containerClass}>
+        <Link
+          href={href}
+          as={as}
+          className={itemClass}
+          style={{
+            color: !button && getAccordingScrollValue(color, scrolled),
+            alignSelf: button && 'center'
+          }}
+        >
+          <Content button={button} label={label} scrolled={scrolled} />
+        </Link>
+      </div>
+    )
+  }
+
+  return (
+    <div className={containerClass}>
+      <p
+        onClick={onClick}
         className={itemClass}
         style={{
           color: !button && getAccordingScrollValue(color, scrolled),
           alignSelf: button && 'center'
         }}
       >
-        {button ? (
-          <span
-            className={buttonClass}
-            style={{
-              backgroundColor:
-                typeof button === 'object' &&
-                getAccordingScrollValue(button.background, scrolled),
-              color:
-                typeof button === 'object' &&
-                getAccordingScrollValue(button.color, scrolled)
-            }}
-          >
-            {label}
-          </span>
-        ) : (
-          label
-        )}
-      </Link>
-    )
-  }
-
-  return (
-    <p
-      onClick={onClick}
-      className={itemClass}
-      style={{
-        color: !button && getAccordingScrollValue(color, scrolled),
-        alignSelf: button && 'center'
-      }}
-    >
-      {button ? (
-        <span
-          className={buttonClass}
-          style={{
-            backgroundColor:
-              typeof button === 'object' &&
-              getAccordingScrollValue(button.background, scrolled),
-            color:
-              typeof button === 'object' &&
-              getAccordingScrollValue(button.color, scrolled)
-          }}
-        >
-          {label}
-        </span>
-      ) : (
-        label
-      )}
-    </p>
+        <Content button={button} label={label} scrolled={scrolled} />
+      </p>
+    </div>
   )
 }
 
@@ -155,5 +126,29 @@ HeaderItem.propTypes = {
         })
       ])
     })
-  ])
+  ]),
+  items: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        href: PropTypes.string,
+        as: PropTypes.string,
+        onClick: PropTypes.func,
+        items: PropTypes.arrayOf(
+          PropTypes.shape({
+            label: PropTypes.string.isRequired,
+            href: PropTypes.string,
+            as: PropTypes.string,
+            onClick: PropTypes.func
+          })
+        )
+      }),
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        href: PropTypes.string,
+        as: PropTypes.string,
+        onClick: PropTypes.func
+      })
+    ])
+  )
 }
