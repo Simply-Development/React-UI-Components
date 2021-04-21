@@ -19,8 +19,8 @@ import Link from '../../Link'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { getAccordingScrollValue } from '../../../lib/scroll'
-import styles from '../../../styles.module.css'
 import Content from './Content'
+import Dropdown from './Dropdown'
 
 /**
  * Item of the Header, allow to use Link and a simple onClick action
@@ -36,10 +36,11 @@ export default function HeaderItem({
   button,
   hideOnSmallDevice,
   as,
-  items
+  items,
+  background
 }) {
   const containerClass = classNames({
-    [styles.dropdown]: items && !button
+    dropdown: items && !button
   })
   const itemClass = classNames({
     'text-sm cursor-pointer': true,
@@ -63,6 +64,12 @@ export default function HeaderItem({
         >
           <Content button={button} label={label} scrolled={scrolled} />
         </Link>
+        <Dropdown
+          items={items}
+          background={background}
+          scrolled={scrolled}
+          color={color}
+        />
       </div>
     )
   }
@@ -79,6 +86,12 @@ export default function HeaderItem({
       >
         <Content button={button} label={label} scrolled={scrolled} />
       </p>
+      <Dropdown
+        items={items}
+        background={background}
+        scrolled={scrolled}
+        color={color}
+      />
     </div>
   )
 }
@@ -88,10 +101,18 @@ HeaderItem.propTypes = {
   onClick: () => {},
   scrolled: false,
   color: undefined,
-  button: false
+  button: false,
+  background: undefined
 }
 
 HeaderItem.propTypes = {
+  background: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      initial: PropTypes.string,
+      onScroll: PropTypes.string
+    })
+  ]),
   label: PropTypes.string.isRequired,
   href: PropTypes.string,
   as: PropTypes.string,

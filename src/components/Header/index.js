@@ -76,6 +76,7 @@ export default function Header({
 
   const headerClass = classNames({
     'grid grid-cols-12 z-20': true,
+    'bg-white': !background,
     fixed: position === 'fixed',
     absolute: position === 'absolute',
     'top-0': ['fixed', 'absolute', 'sticky'].includes(position),
@@ -164,6 +165,7 @@ export default function Header({
                   {...item}
                   scrolled={scrolled}
                   key={index}
+                  background={background}
                   color={
                     typeof color === 'object' && color.item ? color.item : color
                   }

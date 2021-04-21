@@ -77,29 +77,5 @@ ContentItemHeader.propTypes = {
     })
   ]),
   label: PropTypes.string.isRequired,
-  scrolled: PropTypes.bool,
-  items: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        href: PropTypes.string,
-        as: PropTypes.string,
-        onClick: PropTypes.func,
-        items: PropTypes.arrayOf(
-          PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            href: PropTypes.string,
-            as: PropTypes.string,
-            onClick: PropTypes.func
-          })
-        )
-      }),
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        href: PropTypes.string,
-        as: PropTypes.string,
-        onClick: PropTypes.func
-      })
-    ])
-  )
+  scrolled: PropTypes.bool
 }
