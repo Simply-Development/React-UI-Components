@@ -26,26 +26,26 @@ export default function Breadcrumb({ color, items }) {
     'text-gray-800': !color
   })
 
-  if (items.length < 1) {
-    return null
+  if (items.length > 0) {
+    return (
+      <ul style={color && { color }} className={containerClass}>
+        {items.map((item, index) => (
+          <li key={index} className='space-x-1 flex items-center'>
+            {index > 0 && <FiChevronRight color={color} />}
+            {typeof item === 'object' && item.href ? (
+              <Link href={item.href} as={item.as}>
+                {item.label}
+              </Link>
+            ) : (
+              <span>{item}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
   }
 
-  return (
-    <ul style={color && { color }} className={containerClass}>
-      {items.map((item, index) => (
-        <li key={index} className='space-x-1 flex items-center'>
-          {index > 0 && <FiChevronRight color={color} />}
-          {typeof item === 'object' && item.href ? (
-            <Link href={item.href} as={item.as}>
-              {item.label}
-            </Link>
-          ) : (
-            <span>{item}</span>
-          )}
-        </li>
-      ))}
-    </ul>
-  )
+  return null
 }
 
 Breadcrumb.defaultProps = {
@@ -53,7 +53,7 @@ Breadcrumb.defaultProps = {
   items: []
 }
 
-Breadcrumb.propTypess = {
+Breadcrumb.propTypes = {
   color: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([

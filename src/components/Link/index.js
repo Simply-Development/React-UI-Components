@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ export default function LinkComponent({
       </a>
     )
   }
+
   switch (library) {
     case 'nextjs':
       return (
