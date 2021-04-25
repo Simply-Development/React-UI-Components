@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import Sidebar from './components/Sidebar'
 import Input from './components/Input'
 import InputSelect from './components/Input/Select'
 import InputSwitch from './components/Input/Switch'
+import Breadcrumb from './components/Breadcrumb'
 
 export default SimplyUIContext
 export {
@@ -38,5 +39,6 @@ export {
   Sidebar,
   Input,
   InputSelect,
-  InputSwitch
+  InputSwitch,
+  Breadcrumb
 }
