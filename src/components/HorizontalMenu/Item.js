@@ -33,7 +33,6 @@ export default function HorizontalMenuItem({
   const containerClass = classnames({
     'py-2 px-3': true,
     'text-gray-800': !color,
-    'pr-12 md:pr-0': last,
     'border-b-4 font-bold': href === window.location.pathname,
     'border-red-500 text-red-500':
       href === window.location.pathname && !accentColor
@@ -42,6 +41,7 @@ export default function HorizontalMenuItem({
   return (
     <li
       style={{
+        paddingRight: last && '8.3vw',
         color:
           (color || accentColor) &&
           getAccordingScrollValue(

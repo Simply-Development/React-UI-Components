@@ -53,7 +53,7 @@ export default function HorizontalMenu({
   }, [])
 
   const containerClass = classnames({
-    'flex items-center space-x-1 overflow-x-scroll px-12': true,
+    'flex items-center space-x-1 overflow-x-scroll md:justify-center': true,
     'sticky top-0': sticky,
     shadow:
       typeof shadow === 'string'
@@ -66,6 +66,7 @@ export default function HorizontalMenu({
       <ol
         className={containerClass}
         style={{
+          paddingLeft: '8.3vw',
           backgroundColor:
             background && getAccordingScrollValue(background, scrolled)
         }}
