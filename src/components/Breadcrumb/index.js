@@ -26,7 +26,7 @@ export default function Breadcrumb({ color, items }) {
     'text-gray-800': !color
   })
 
-  if (items.length > 0) {
+  if (items.length) {
     return (
       <ul style={color && { color }} className={containerClass}>
         {items.map((item, index) => (
