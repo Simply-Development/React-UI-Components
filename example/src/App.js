@@ -6,9 +6,17 @@ const App = () => {
   return (
     <SimplyUIProvider>
       <Header
-        title="Simply Development"
+        title="Oaxacarifa"
         sidebarButton
         position="fixed"
+        items={[
+          {
+            label: 'Test'
+          },
+          {
+            label: 'Test'
+          }
+        ]}
       />
       <div className="h-screen" />
       <div className="h-screen" />

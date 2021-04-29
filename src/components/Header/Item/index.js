@@ -40,6 +40,7 @@ export default function HeaderItem({
   background
 }) {
   const containerClass = classNames({
+    'hidden md:block': true,
     dropdown: items && !button
   })
   const itemClass = classNames({
