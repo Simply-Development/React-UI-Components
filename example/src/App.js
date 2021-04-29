@@ -17,6 +17,20 @@ const App = () => {
             label: 'Test'
           }
         ]}
+        color={{
+          title: {
+            initial: 'black',
+            onScroll: '#e92f2d'
+          },
+          item: {
+            initial: 'red',
+            onScroll: '#1F2937'
+          }
+        }}
+        background={{
+          initial: 'transparent',
+          onScroll: 'white'
+        }}
       />
       <div className="h-screen" />
       <div className="h-screen" />

@@ -142,7 +142,7 @@ export default function Header({
                         typeof color === 'object'
                           ? getAccordingScrollValue(
                               color.title || color,
-                              scrolled
+                              scrolled || isSidebarOpen
                             )
                           : color
                     }
@@ -244,7 +244,7 @@ export default function Header({
                     rotate={0}
                     color={
                       color &&
-                      getAccordingScrollValue(color.item || color, scrolled)
+                      getAccordingScrollValue(color.item || color, scrolled || isSidebarOpen)
                     }
                     borderRadius={0}
                     animationDuration={0.5}
@@ -355,10 +355,7 @@ Header.propTypes = {
       )
     })
   ),
-  sidebarButton: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.func
-  ]),
+  sidebarButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   hideItemsOnSmallDevices: PropTypes.bool,
   setSidebarState: PropTypes.func,
   withCart: PropTypes.oneOfType([
