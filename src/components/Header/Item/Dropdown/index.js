@@ -54,7 +54,7 @@ export default function DropdownItemHeader({
             <Item key={index} {...item} color={color} scrolled={scrolled} />
           ))}
         </ol>
-        <style jsx>{`
+        <style jsx='true'>{`
           .dropdown ol {
             display: none;
             position: absolute;

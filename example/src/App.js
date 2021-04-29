@@ -1,29 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SimplyUIProvider, Header } from 'simply-react-ui-components'
 import 'tailwindcss/dist/tailwind.min.css';
 
 const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const header = {
+    color: {
+      title: {
+        initial: 'white'
+      },
+      item: {
+        initial: 'white'
+      }
+    },
+    items: [
+      {
+        label: 'Test'
+      }
+    ]
+  }
+
   return (
     <SimplyUIProvider>
       <Header
-        title="Oaxacarifa"
-        sidebarButton
-        position="fixed"
-        items={[
-          {
-            label: 'Test'
-          },
-          {
-            label: 'Test'
-          }
-        ]}
         color={{
           title: {
-            initial: 'black',
+            initial: header.color?.title?.initial || '#e92f2d',
             onScroll: '#e92f2d'
           },
           item: {
-            initial: 'red',
+            initial: header.color?.item?.initial || '#1F2937',
             onScroll: '#1F2937'
           }
         }}
@@ -31,6 +37,13 @@ const App = () => {
           initial: 'transparent',
           onScroll: 'white'
         }}
+        title="Oaxacarifa"
+        position="fixed"
+        shadow="onScroll"
+        items={header.items}
+        sidebarState={isSidebarOpen}
+        setSidebarState={setIsSidebarOpen}
+        sidebarButton
       />
       <div className="h-screen" />
       <div className="h-screen" />

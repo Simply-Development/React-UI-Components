@@ -84,18 +84,18 @@ export default function Header({
     shadow:
       typeof shadow === 'object'
         ? shadow.value === undefined
-          ? shadow.when === 'always' || scrolled
+          ? shadow.when === 'always' || (scrolled && !isSidebarOpen)
           : false
         : typeof shadow === 'string'
-        ? shadow === 'always' || scrolled
+        ? shadow === 'always' || (scrolled && !isSidebarOpen)
         : shadow,
     'transition-all duration-100 ease-in-out':
       typeof shadow === 'string' && shadow === 'onScroll'
   })
   const titleClass = classNames({
     'font-bold inline-block': true,
-    'text-xl': !scrolled,
-    'text-lg': scrolled,
+    'text-xl': !scrolled || isSidebarOpen,
+    'text-lg': scrolled && !isSidebarOpen,
     'md:py-3': items.length < 1 && !scrolled,
     'md:py-2': items.length < 1 && scrolled,
     'py-2': hideItemsOnSmallDevices && !scrolled,
@@ -154,7 +154,7 @@ export default function Header({
             )}
           </div>
           <div>
-            <div className='grid grid-flow-col col-gap-10 lg:col-gap-12 items-center absolute top-0 md:relative'>
+            <div className='md:grid grid-flow-col col-gap-10 lg:col-gap-12 items-center absolute top-0 md:relative'>
               {items.map((item, index) => (
                 <Item
                   hideOnSmallDevice={hideItemsOnSmallDevices}

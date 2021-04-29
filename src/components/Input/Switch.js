@@ -59,7 +59,7 @@ export default function SwitchInput({ label, color, onChange, checked }) {
           className={dotClass}
         />
       </div>
-      <style jsx>{`
+      <style jsx='true'>{`
         .simply_input_switch_dot {
           top: -0.25rem;
           left: -0.25rem;

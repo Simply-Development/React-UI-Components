@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Simply Development
+ * Copyright 2021 Simply Development
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 import React from 'react'
 import Link from '../Link'
+import PropTypes from 'prop-types'
 
 /**
  * Basic item of the Sidebar
@@ -59,4 +60,20 @@ export default function SidebarItem({
       <p className='col-start-2 col-span-10 text-lg'>{label}</p>
     </div>
   )
+}
+
+SidebarItem.defaultProps = {
+  href: undefined,
+  as: undefined,
+  onClick: function () {},
+  color: undefined
+}
+
+SidebarItem.propTypes = {
+  href: PropTypes.string,
+  as: PropTypes.string,
+  onClick: PropTypes.func,
+  label: PropTypes.string.isRequired,
+  closeSidebar: PropTypes.func.isRequired,
+  color: PropTypes.string
 }
