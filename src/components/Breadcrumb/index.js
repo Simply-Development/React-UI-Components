@@ -16,30 +16,31 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import Link from '../Link'
-import { FiChevronRight } from 'react-icons/fi'
+import Item from './Item'
 import PropTypes from 'prop-types'
 
 export default function Breadcrumb({ color, items }) {
   const containerClass = classnames({
     'flex items-center space-x-1 text-sm': true,
-    'text-gray-800': !color
+    'text-gray-800': typeof color === 'object' ? !color.normal : !color
   })
 
   if (items.length) {
     return (
-      <ul style={color && { color }} className={containerClass}>
+      <ul
+        style={
+          color && { color: typeof color === 'object' ? color.normal : color }
+        }
+        className={containerClass}
+      >
         {items.map((item, index) => (
-          <li key={index} className='space-x-1 flex items-center'>
-            {index > 0 && <FiChevronRight color={color} />}
-            {typeof item === 'object' && item.href ? (
-              <Link href={item.href} as={item.as}>
-                {item.label}
-              </Link>
-            ) : (
-              <span>{item}</span>
-            )}
-          </li>
+          <Item
+            key={index}
+            item={item}
+            first={index === 0}
+            last={index === items.length - 1}
+            color={color}
+          />
         ))}
       </ul>
     )
@@ -54,7 +55,13 @@ Breadcrumb.defaultProps = {
 }
 
 Breadcrumb.propTypes = {
-  color: PropTypes.string,
+  color: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      normal: PropTypes.string,
+      accent: PropTypes.string
+    })
+  ]),
   items: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
