@@ -98,17 +98,13 @@ export default function Header({
     'text-lg': scrolled,
     'md:py-3': items.length < 1 && !scrolled,
     'md:py-2': items.length < 1 && scrolled,
-    'py-2': !sidebarButton && hideItemsOnSmallDevices && !scrolled,
-    'py-1': !sidebarButton && hideItemsOnSmallDevices && scrolled
+    'py-2': hideItemsOnSmallDevices && !scrolled,
+    'py-1': hideItemsOnSmallDevices && scrolled
   })
   const sidebarButtonClass = classNames({
-    'cursor-pointer': true,
+    'cursor-pointer md:hidden': true,
     'my-3': !scrolled,
-    'my-2': scrolled,
-    'md:hidden':
-      typeof sidebarButton === 'string' && sidebarButton === 'onlySmall',
-    'hidden md:block':
-      typeof sidebarButton === 'string' && sidebarButton === 'onlyBig'
+    'my-2': scrolled
   })
   const cartContainerClass = classNames({
     relative: true,
@@ -158,7 +154,7 @@ export default function Header({
             )}
           </div>
           <div>
-            <div className='grid grid-flow-col col-gap-10 lg:col-gap-12 items-center'>
+            <div className='grid grid-flow-col col-gap-10 lg:col-gap-12 items-center absolute top-0 md:relative'>
               {items.map((item, index) => (
                 <Item
                   hideOnSmallDevice={hideItemsOnSmallDevices}
@@ -361,8 +357,7 @@ Header.propTypes = {
   ),
   sidebarButton: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.func,
-    PropTypes.oneOf(['onlySmall', 'onlyBig'])
+    PropTypes.func
   ]),
   hideItemsOnSmallDevices: PropTypes.bool,
   setSidebarState: PropTypes.func,
