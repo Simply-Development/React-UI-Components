@@ -33,9 +33,9 @@ export default function HorizontalMenuItem({
   const containerClass = classnames({
     'py-2 px-3': true,
     'text-gray-800': !color,
-    'border-b-4 font-bold': href === window.location.pathname,
+    'border-b-4 font-bold': href === window?.location?.pathname,
     'border-red-500 text-red-500':
-      href === window.location.pathname && !accentColor
+      href === window?.location?.pathname && !accentColor
   })
 
   return (
@@ -45,7 +45,7 @@ export default function HorizontalMenuItem({
         color:
           (color || accentColor) &&
           getAccordingScrollValue(
-            href === window.location.pathname ? accentColor : color,
+            href === window?.location?.pathname ? accentColor : color,
             scrolled
           )
       }}
@@ -59,7 +59,7 @@ export default function HorizontalMenuItem({
           className={containerClass}
           style={{
             borderColor:
-              href === window.location.pathname &&
+              href === window?.location?.pathname &&
               accentColor &&
               getAccordingScrollValue(accentColor, scrolled)
           }}
