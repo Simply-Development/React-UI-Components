@@ -26,7 +26,6 @@ import Input from './components/Input'
 import InputSelect from './components/Input/Select'
 import InputSwitch from './components/Input/Switch'
 import Breadcrumb from './components/Breadcrumb'
-import HorizontalMenu from './components/HorizontalMenu'
 
 export default SimplyUIContext
 export {
@@ -41,6 +40,5 @@ export {
   Input,
   InputSelect,
   InputSwitch,
-  Breadcrumb,
-  HorizontalMenu
+  Breadcrumb
 }
