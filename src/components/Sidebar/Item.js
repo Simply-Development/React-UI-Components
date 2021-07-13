@@ -24,56 +24,56 @@ import PropTypes from 'prop-types'
  * @component
  */
 export default function SidebarItem({
-  href,
-  as,
-  onClick,
-  label,
-  closeSidebar,
-  color
+	href,
+	as,
+	onClick,
+	label,
+	closeSidebar,
+	color
 }) {
-  if (href) {
-    return (
-      <Link
-        href={href}
-        as={as}
-        onClick={() => {
-          onClick()
-          closeSidebar()
-        }}
-        style={color ? { color } : {}}
-        className='grid grid-cols-12 py-2'
-      >
-        <p className='col-start-2 col-span-10 text-lg'>{label}</p>
-      </Link>
-    )
-  }
+	if (href) {
+		return (
+			<Link
+				href={href}
+				as={as}
+				onClick={() => {
+					onClick()
+					closeSidebar()
+				}}
+				style={color ? { color } : {}}
+				className='grid grid-cols-12 py-2'
+			>
+				<p className='col-start-2 col-span-10 text-lg'>{label}</p>
+			</Link>
+		)
+	}
 
-  return (
-    <div
-      className='grid grid-cols-12 py-2'
-      style={color ? { color } : {}}
-      onClick={() => {
-        onClick()
-        closeSidebar()
-      }}
-    >
-      <p className='col-start-2 col-span-10 text-lg'>{label}</p>
-    </div>
-  )
+	return (
+		<div
+			className='grid grid-cols-12 py-2'
+			style={color ? { color } : {}}
+			onClick={() => {
+				onClick()
+				closeSidebar()
+			}}
+		>
+			<p className='col-start-2 col-span-10 text-lg'>{label}</p>
+		</div>
+	)
 }
 
 SidebarItem.defaultProps = {
-  href: undefined,
-  as: undefined,
-  onClick: function () {},
-  color: undefined
+	href: undefined,
+	as: undefined,
+	onClick: function () {},
+	color: undefined
 }
 
 SidebarItem.propTypes = {
-  href: PropTypes.string,
-  as: PropTypes.string,
-  onClick: PropTypes.func,
-  label: PropTypes.string.isRequired,
-  closeSidebar: PropTypes.func.isRequired,
-  color: PropTypes.string
+	href: PropTypes.string,
+	as: PropTypes.string,
+	onClick: PropTypes.func,
+	label: PropTypes.string.isRequired,
+	closeSidebar: PropTypes.func.isRequired,
+	color: PropTypes.string
 }

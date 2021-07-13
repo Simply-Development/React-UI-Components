@@ -29,21 +29,21 @@ const SimplyUIContext = createContext({})
  * @param library The React complementary library like NextJS or Gatsby
  * */
 function SimplyUIProvider({ children, Link, library }) {
-  return (
-    <SimplyUIContext.Provider value={{ Link, library }}>
-      {children}
-    </SimplyUIContext.Provider>
-  )
+	return (
+		<SimplyUIContext.Provider value={{ Link, library }}>
+			{children}
+		</SimplyUIContext.Provider>
+	)
 }
 
 SimplyUIProvider.defaultProps = {
-  Link: undefined,
-  library: undefined
+	Link: undefined,
+	library: undefined
 }
 
 SimplyUIProvider.propTypes = {
-  Link: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),
-  library: PropTypes.oneOf(['nextjs'])
+	Link: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),
+	library: PropTypes.oneOf(['nextjs'])
 }
 
 export default SimplyUIContext

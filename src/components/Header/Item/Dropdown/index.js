@@ -18,7 +18,8 @@ import React, { Fragment } from 'react'
 import classnames from 'classnames'
 import Item from './Item'
 import PropTypes from 'prop-types'
-import { getAccordingScrollValue } from '../../../../lib/scroll'
+import { getAccordingScrollValue } from '../../../../utils/scroll'
+import { baseColorIfTransparent } from '../../../../utils/color'
 
 /**
  * Dropdown items inside Header Item
@@ -28,102 +29,105 @@ import { getAccordingScrollValue } from '../../../../lib/scroll'
  * @component
  */
 export default function DropdownItemHeader({
-  items,
-  background,
-  scrolled,
-  color
+	items,
+	background,
+	scrolled,
+	color
 }) {
-  const listClass = classnames({
-    'rounded shadow': true,
-    'bg-white': !background
-  })
+	const listClass = classnames({
+		'rounded shadow': true,
+		'bg-white': !background
+	})
 
-  if (items && items.length > 0) {
-    return (
-      <Fragment>
-        <ol
-          style={
-            background && {
-              backgroundColor:
-                background && getAccordingScrollValue(background, scrolled)
-            }
-          }
-          className={listClass}
-        >
-          {items.map((item, index) => (
-            <Item key={index} {...item} color={color} scrolled={scrolled} />
-          ))}
-        </ol>
-        <style jsx='true'>{`
-          .dropdown ol {
-            display: none;
-            position: absolute;
-          }
-          .dropdown:hover ol {
-            display: block;
-          }
-        `}</style>
-      </Fragment>
-    )
-  }
+	if (items && items.length > 0) {
+		return (
+			<Fragment>
+				<ol
+					style={
+						background && {
+							backgroundColor:
+								background &&
+								baseColorIfTransparent(
+									getAccordingScrollValue(background, scrolled)
+								)
+						}
+					}
+					className={listClass}
+				>
+					{items.map((item, index) => (
+						<Item key={index} {...item} color={color} scrolled={scrolled} />
+					))}
+				</ol>
+				<style jsx='true'>{`
+					.dropdown ol {
+						display: none;
+						position: absolute;
+					}
+					.dropdown:hover ol {
+						display: block;
+					}
+				`}</style>
+			</Fragment>
+		)
+	}
 
-  return null
+	return null
 }
 
 DropdownItemHeader.defaultProps = {
-  items: undefined,
-  background: undefined,
-  scrolled: false
+	items: undefined,
+	background: undefined,
+	scrolled: false
 }
 
 DropdownItemHeader.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        href: PropTypes.string,
-        as: PropTypes.string,
-        onClick: PropTypes.func,
-        items: PropTypes.arrayOf(
-          PropTypes.shape({
-            label: PropTypes.string.isRequired,
-            href: PropTypes.string,
-            as: PropTypes.string,
-            onClick: PropTypes.func
-          })
-        )
-      }),
-      PropTypes.shape({
-        label: PropTypes.string.isRequired,
-        href: PropTypes.string,
-        as: PropTypes.string,
-        onClick: PropTypes.func
-      })
-    ])
-  ),
-  background: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      initial: PropTypes.string,
-      onScroll: PropTypes.string
-    })
-  ]),
-  scrolled: PropTypes.bool,
-  color: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      initial: PropTypes.string,
-      onScroll: PropTypes.string
-    }),
-    PropTypes.shape({
-      title: PropTypes.shape({
-        initial: PropTypes.string,
-        onScroll: PropTypes.string
-      }),
-      item: PropTypes.shape({
-        initial: PropTypes.string,
-        onScroll: PropTypes.string
-      })
-    })
-  ])
+	items: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				title: PropTypes.string.isRequired,
+				href: PropTypes.string,
+				as: PropTypes.string,
+				onClick: PropTypes.func,
+				items: PropTypes.arrayOf(
+					PropTypes.shape({
+						label: PropTypes.string.isRequired,
+						href: PropTypes.string,
+						as: PropTypes.string,
+						onClick: PropTypes.func
+					})
+				)
+			}),
+			PropTypes.shape({
+				label: PropTypes.string.isRequired,
+				href: PropTypes.string,
+				as: PropTypes.string,
+				onClick: PropTypes.func
+			})
+		])
+	),
+	background: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.shape({
+			initial: PropTypes.string,
+			onScroll: PropTypes.string
+		})
+	]),
+	scrolled: PropTypes.bool,
+	color: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.shape({
+			initial: PropTypes.string,
+			onScroll: PropTypes.string
+		}),
+		PropTypes.shape({
+			title: PropTypes.shape({
+				initial: PropTypes.string,
+				onScroll: PropTypes.string
+			}),
+			item: PropTypes.shape({
+				initial: PropTypes.string,
+				onScroll: PropTypes.string
+			})
+		})
+	])
 }

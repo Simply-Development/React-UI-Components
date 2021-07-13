@@ -19,76 +19,76 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 export default function CookieConsent({
-  background,
-  translucent,
-  children,
-  acceptance,
-  color
+	background,
+	translucent,
+	children,
+	acceptance,
+	color
 }) {
-  const mainClass = classnames({
-    'grid grid-cols-12 py-3 fixed bottom-0 w-full': true,
-    'bg-black': background === undefined,
-    'bg-opacity-75': translucent
-  })
-  const textClass = classnames({
-    'w-11/12 text-xs': true,
-    'text-gray-500': color === undefined
-  })
-  const buttonClass = classnames({
-    'text-sm uppercase px-2 py-1 border': true,
-    'text-white':
-      typeof acceptance !== 'object' || acceptance.color === undefined
-  })
+	const mainClass = classnames({
+		'grid grid-cols-12 py-3 fixed bottom-0 w-full': true,
+		'bg-black': background === undefined,
+		'bg-opacity-75': translucent
+	})
+	const textClass = classnames({
+		'w-11/12 text-xs': true,
+		'text-gray-500': color === undefined
+	})
+	const buttonClass = classnames({
+		'text-sm uppercase px-2 py-1 border': true,
+		'text-white':
+			typeof acceptance !== 'object' || acceptance.color === undefined
+	})
 
-  return (
-    <div
-      className={mainClass}
-      style={background && { backgroundColor: background }}
-    >
-      <div className='col-start-2 col-span-10'>
-        <div className='flex justify-between items-center'>
-          <p className={textClass} style={color && { color }}>
-            {children}
-          </p>
-          <button
-            type='button'
-            onClick={
-              typeof acceptance === 'object' ? acceptance.accept : () => {}
-            }
-            className={buttonClass}
-            style={
-              typeof acceptance === 'object'
-                ? acceptance.color && {
-                    borderColor: acceptance.color,
-                    color: acceptance.color
-                  }
-                : {}
-            }
-          >
-            {typeof acceptance === 'object' ? acceptance.text : acceptance}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
+	return (
+		<div
+			className={mainClass}
+			style={background && { backgroundColor: background }}
+		>
+			<div className='col-start-2 col-span-10'>
+				<div className='flex justify-between items-center'>
+					<p className={textClass} style={color && { color }}>
+						{children}
+					</p>
+					<button
+						type='button'
+						onClick={
+							typeof acceptance === 'object' ? acceptance.accept : () => {}
+						}
+						className={buttonClass}
+						style={
+							typeof acceptance === 'object'
+								? acceptance.color && {
+										borderColor: acceptance.color,
+										color: acceptance.color
+								  }
+								: {}
+						}
+					>
+						{typeof acceptance === 'object' ? acceptance.text : acceptance}
+					</button>
+				</div>
+			</div>
+		</div>
+	)
 }
 
 CookieConsent.defaultProps = {
-  background: undefined,
-  translucent: false,
-  color: undefined
+	background: undefined,
+	translucent: false,
+	color: undefined
 }
 
 CookieConsent.propTypes = {
-  background: PropTypes.string,
-  translucent: PropTypes.bool,
-  acceptance: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      color: PropTypes.string,
-      accept: PropTypes.func.isRequired
-    })
-  ]).isRequired,
-  color: PropTypes.string
+	background: PropTypes.string,
+	translucent: PropTypes.bool,
+	acceptance: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.shape({
+			text: PropTypes.string.isRequired,
+			color: PropTypes.string,
+			accept: PropTypes.func.isRequired
+		})
+	]).isRequired,
+	color: PropTypes.string
 }

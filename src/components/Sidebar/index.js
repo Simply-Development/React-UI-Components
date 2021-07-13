@@ -25,72 +25,72 @@ import Item from './Item'
  * @component
  */
 export default function Sidebar({
-  isOpen,
-  close,
-  background,
-  shadowColor,
-  position,
-  items,
-  color
+	isOpen,
+	close,
+	background,
+	shadowColor,
+	position,
+	items,
+	color
 }) {
-  const mainContainer = classnames({
-    'grid grid-cols-12 w-full h-full transition-all duration-300 ease-in-out top-0': true,
-    fixed: position === 'fixed',
-    absolute: position === 'absolute',
-    'bg-white': background === undefined,
-    shadow: shadowColor === undefined
-  })
+	const mainContainer = classnames({
+		'grid grid-cols-12 w-full h-full transition-all duration-300 ease-in-out top-0': true,
+		fixed: position === 'fixed',
+		absolute: position === 'absolute',
+		'bg-white': background === undefined,
+		shadow: shadowColor === undefined
+	})
 
-  return (
-    <div
-      className={mainContainer}
-      style={
-        ['fixed', 'absolute'].includes(position)
-          ? {
-              left: isOpen ? 0 : '-100%',
-              zIndex: 19,
-              backgroundColor: background,
-              boxShadow: shadowColor
-            }
-          : {
-              backgroundColor: background,
-              boxShadow: shadowColor
-            }
-      }
-    >
-      <div className='col-span-12 mt-12 md:mt-16'>
-        {items.map((item, index) => (
-          <Item key={index} closeSidebar={close} color={color} {...item} />
-        ))}
-      </div>
-    </div>
-  )
+	return (
+		<div
+			className={mainContainer}
+			style={
+				['fixed', 'absolute'].includes(position)
+					? {
+							left: isOpen ? 0 : '-100%',
+							zIndex: 19,
+							backgroundColor: background,
+							boxShadow: shadowColor
+					  }
+					: {
+							backgroundColor: background,
+							boxShadow: shadowColor
+					  }
+			}
+		>
+			<div className='col-span-12 mt-12 md:mt-16'>
+				{items.map((item, index) => (
+					<Item key={index} closeSidebar={close} color={color} {...item} />
+				))}
+			</div>
+		</div>
+	)
 }
 
 Sidebar.defaultProps = {
-  isOpen: true,
-  position: 'relative',
-  background: undefined,
-  shadowColor: undefined,
-  items: [],
-  close: () => {},
-  color: undefined
+	isOpen: true,
+	position: 'relative',
+	background: undefined,
+	shadowColor: undefined,
+	items: [],
+	close: () => {},
+	color: undefined
 }
 
 Sidebar.propTypes = {
-  isOpen: PropTypes.bool,
-  background: PropTypes.string,
-  shadowColor: PropTypes.string,
-  position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
-  close: PropTypes.func,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      href: PropTypes.string,
-      as: PropTypes.string,
-      onClick: PropTypes.func,
-      label: PropTypes.string.isRequired,
-      closeSidebar: PropTypes.func
-    })
-  ),
-  color: PropTypes.string
+	isOpen: PropTypes.bool,
+	background: PropTypes.string,
+	shadowColor: PropTypes.string,
+	position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
+	close: PropTypes.func,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			href: PropTypes.string,
+			as: PropTypes.string,
+			onClick: PropTypes.func,
+			label: PropTypes.string.isRequired,
+			closeSidebar: PropTypes.func
+		})
+	),
+	color: PropTypes.string
 }

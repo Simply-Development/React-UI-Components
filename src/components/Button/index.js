@@ -25,68 +25,68 @@ import PropTypes from 'prop-types'
  * @component
  */
 export default function Button({
-  children,
-  onClick,
-  href,
-  background,
-  color,
-  rounded,
-  className,
-  submit
+	children,
+	onClick,
+	href,
+	background,
+	color,
+	rounded,
+	className,
+	submit
 }) {
-  const mainContainerClass = classnames({
-    'px-5 py-3 font-bold uppercase w-full md:w-auto': true,
-    rounded: typeof rounded === 'boolean' && rounded,
-    'rounded-full': rounded === 'full',
-    [className]: className
-  })
+	const mainContainerClass = classnames({
+		'px-5 py-3 font-bold uppercase w-full md:w-auto': true,
+		rounded: typeof rounded === 'boolean' && rounded,
+		'rounded-full': rounded === 'full',
+		[className]: className
+	})
 
-  if (href) {
-    return (
-      <Link
-        href={href}
-        className={mainContainerClass}
-        style={{
-          backgroundColor: background,
-          color
-        }}
-      >
-        {children}
-      </Link>
-    )
-  }
+	if (href) {
+		return (
+			<Link
+				href={href}
+				className={mainContainerClass}
+				style={{
+					backgroundColor: background,
+					color
+				}}
+			>
+				{children}
+			</Link>
+		)
+	}
 
-  return (
-    <button
-      onClick={onClick}
-      type={submit ? 'submit' : 'button'}
-      className={mainContainerClass}
-      style={{
-        backgroundColor: background,
-        color
-      }}
-    >
-      {children}
-    </button>
-  )
+	return (
+		<button
+			onClick={onClick}
+			type={submit ? 'submit' : 'button'}
+			className={mainContainerClass}
+			style={{
+				backgroundColor: background,
+				color
+			}}
+		>
+			{children}
+		</button>
+	)
 }
 
 Button.propTypes = {
-  rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  href: PropTypes.string,
-  background: PropTypes.string,
-  color: PropTypes.string,
-  submit: PropTypes.bool
+	rounded: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['full'])]),
+	className: PropTypes.string,
+	onClick: PropTypes.func,
+	href: PropTypes.string,
+	background: PropTypes.string,
+	color: PropTypes.string,
+	submit: PropTypes.bool
 }
 
 Button.defaultProps = {
-  rounded: undefined,
-  className: undefined,
-  onClick: () => {},
-  background: undefined,
-  color: undefined,
-  href: undefined,
-  submit: false
+	rounded: undefined,
+	className: undefined,
+	onClick: () => {},
+	background: undefined,
+	color: undefined,
+	href: undefined,
+	submit: false
 }

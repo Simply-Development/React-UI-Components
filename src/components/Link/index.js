@@ -17,7 +17,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import SimplyUIContext from '../../contexts/SimplyUIContext'
 import PropTypes from 'prop-types'
-import verifyURL from '../../lib/verifyURL'
+import verifyURL from '../../utils/verifyURL'
 
 /**
  * The Link to move around the application, return a simple a html tag
@@ -26,65 +26,65 @@ import verifyURL from '../../lib/verifyURL'
  * @component
  * */
 export default function LinkComponent({
-  children,
-  href,
-  className,
-  style,
-  as,
-  onClick
+	children,
+	href,
+	className,
+	style,
+	as,
+	onClick
 }) {
-  const { Link, library } = useContext(SimplyUIContext)
-  const [isExternalLink, setIsExternalLink] = useState(false)
+	const { Link, library } = useContext(SimplyUIContext)
+	const [isExternalLink, setIsExternalLink] = useState(false)
 
-  useEffect(() => {
-    if (verifyURL(href)) {
-      setIsExternalLink(true)
-    }
-  }, [])
+	useEffect(() => {
+		if (verifyURL(href)) {
+			setIsExternalLink(true)
+		}
+	}, [])
 
-  if (Link === undefined || isExternalLink) {
-    return (
-      <a
-        href={href}
-        className={className}
-        style={style}
-        target='_blank'
-        rel='noreferrer'
-        onClick={onClick}
-      >
-        {children}
-      </a>
-    )
-  }
+	if (Link === undefined || isExternalLink) {
+		return (
+			<a
+				href={href}
+				className={className}
+				style={style}
+				target='_blank'
+				rel='noreferrer'
+				onClick={onClick}
+			>
+				{children}
+			</a>
+		)
+	}
 
-  switch (library) {
-    case 'nextjs':
-      return (
-        <Link href={href} as={as}>
-          <a className={className} style={style} onClick={onClick}>
-            {children}
-          </a>
-        </Link>
-      )
-    default:
-      return (
-        <Link href={href} className={className}>
-          {children}
-        </Link>
-      )
-  }
+	switch (library) {
+		case 'nextjs':
+			return (
+				<Link href={href} as={as}>
+					<a className={className} style={style} onClick={onClick}>
+						{children}
+					</a>
+				</Link>
+			)
+		default:
+			return (
+				<Link href={href} className={className}>
+					{children}
+				</Link>
+			)
+	}
 }
 
 LinkComponent.defaultProps = {
-  className: undefined,
-  style: undefined,
-  onClick: () => {}
+	className: undefined,
+	style: undefined,
+	onClick: () => {}
 }
 
 LinkComponent.propTypes = {
-  children: PropTypes.node.isRequired,
-  href: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func
+	children: PropTypes.node.isRequired,
+	href: PropTypes.string.isRequired,
+	className: PropTypes.string,
+	style: PropTypes.object,
+	onClick: PropTypes.func
 }

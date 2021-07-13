@@ -29,16 +29,16 @@ import Breadcrumb from './components/Breadcrumb'
 
 export default SimplyUIContext
 export {
-  SimplyUIProvider,
-  Header,
-  Banner,
-  Footer,
-  Button,
-  CookieConsent,
-  SectionWithItem,
-  Sidebar,
-  Input,
-  InputSelect,
-  InputSwitch,
-  Breadcrumb
+	SimplyUIProvider,
+	Header,
+	Banner,
+	Footer,
+	Button,
+	CookieConsent,
+	SectionWithItem,
+	Sidebar,
+	Input,
+	InputSelect,
+	InputSwitch,
+	Breadcrumb
 }

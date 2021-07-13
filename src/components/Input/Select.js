@@ -19,96 +19,96 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 export default function SelectInput({
-  value,
-  name,
-  disabled,
-  onChange,
-  options,
-  label,
-  required,
-  border,
-  color,
-  error
+	value,
+	name,
+	disabled,
+	onChange,
+	options,
+	label,
+	required,
+	border,
+	color,
+	error
 }) {
-  const labelClass = classnames({
-    'text-sm w-full': true,
-    'text-gray-600': !error && !color.label,
-    'text-red-600': error && !color.error
-  })
-  const selectClass = classnames({
-    'bg-white text-black rounded p-2 text-lg block w-full': true,
-    border: border,
-    'border-gray-600': !error && !color.label,
-    'border-red-600': error && !color.error,
-    'mt-2': label,
-    'mb-4': !error
-  })
-  const errorClass = classnames({
-    'mb-4 mt-2': true,
-    'text-red-600': !color.error
-  })
+	const labelClass = classnames({
+		'text-sm w-full': true,
+		'text-gray-600': !error && !color.label,
+		'text-red-600': error && !color.error
+	})
+	const selectClass = classnames({
+		'bg-white text-black rounded p-2 text-lg block w-full': true,
+		border: border,
+		'border-gray-600': !error && !color.label,
+		'border-red-600': error && !color.error,
+		'mt-2': label,
+		'mb-4': !error
+	})
+	const errorClass = classnames({
+		'mb-4 mt-2': true,
+		'text-red-600': !color.error
+	})
 
-  return (
-    <label className={labelClass} style={color.label && { color: color.label }}>
-      {label && `${required ? '*' : ''}${label}`}
-      <select
-        required={required}
-        disabled={disabled}
-        name={name}
-        value={!value ? 'null' : value}
-        onChange={onChange}
-        className={selectClass}
-        style={Object.assign(
-          {},
-          color.label && { borderColor: color.label },
-          color.value && { color: color.value }
-        )}
-      >
-        {options.map((option) => (
-          <option
-            key={!option.value ? 'null' : option.value}
-            value={!option.value ? 'null' : option.value}
-          >
-            {option.label}
-          </option>
-        ))}
-      </select>
-      {error && (
-        <p className={errorClass} style={color.error && { color: color.error }}>
-          {error}
-        </p>
-      )}
-    </label>
-  )
+	return (
+		<label className={labelClass} style={color.label && { color: color.label }}>
+			{label && `${required ? '*' : ''}${label}`}
+			<select
+				required={required}
+				disabled={disabled}
+				name={name}
+				value={!value ? 'null' : value}
+				onChange={onChange}
+				className={selectClass}
+				style={Object.assign(
+					{},
+					color.label && { borderColor: color.label },
+					color.value && { color: color.value }
+				)}
+			>
+				{options.map((option) => (
+					<option
+						key={!option.value ? 'null' : option.value}
+						value={!option.value ? 'null' : option.value}
+					>
+						{option.label}
+					</option>
+				))}
+			</select>
+			{error && (
+				<p className={errorClass} style={color.error && { color: color.error }}>
+					{error}
+				</p>
+			)}
+		</label>
+	)
 }
 
 SelectInput.defaultProps = {
-  disabled: false,
-  label: null,
-  border: true,
-  color: {},
-  value: null,
-  error: null
+	disabled: false,
+	label: null,
+	border: true,
+	color: {},
+	value: null,
+	error: null
 }
 
 SelectInput.propTypes = {
-  value: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string
-    }).isRequired
-  ).isRequired,
-  label: PropTypes.string,
-  border: PropTypes.bool,
-  color: PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.string,
-    error: PropTypes.string,
-    input: PropTypes.string
-  }),
-  error: PropTypes.string
+	value: PropTypes.string,
+	name: PropTypes.string.isRequired,
+	disabled: PropTypes.bool,
+	onChange: PropTypes.func.isRequired,
+	options: PropTypes.arrayOf(
+		PropTypes.shape({
+			label: PropTypes.string.isRequired,
+			value: PropTypes.string
+		}).isRequired
+	).isRequired,
+	label: PropTypes.string,
+	border: PropTypes.bool,
+	color: PropTypes.shape({
+		label: PropTypes.string,
+		value: PropTypes.string,
+		error: PropTypes.string,
+		input: PropTypes.string
+	}),
+	error: PropTypes.string
 }

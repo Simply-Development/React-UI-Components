@@ -20,33 +20,34 @@ import { FiChevronRight } from 'react-icons/fi'
 import classnames from 'classnames'
 
 export default function BreadcrumbItem({ item, color, first, last }) {
-  const itemClass = classnames({
-    'text-red-500': last && typeof color !== 'object' && !color?.accent
-  })
+	const itemClass = classnames({
+		'text-red-500': last && typeof color !== 'object' && !color?.accent
+	})
 
-  return (
-    <li className='space-x-1 flex items-center'>
-      {!first && <FiChevronRight color={color} />}
-      {typeof item === 'object' && item.href ? (
-        <Link
-          style={
-            last && typeof color === 'object' ? { color: color.accent } : {}
-          }
-          href={item.href}
-          as={item.as}
-          className={itemClass}>
-          {item.label}
-        </Link>
-      ) : (
-        <span
-          style={
-            last && typeof color === 'object' ? { color: color.accent } : {}
-          }
-          className={itemClass}
-        >
-          {item}
-        </span>
-      )}
-    </li>
-  )
+	return (
+		<li className='space-x-1 flex items-center'>
+			{!first && <FiChevronRight color={color} />}
+			{typeof item === 'object' && item.href ? (
+				<Link
+					style={
+						last && typeof color === 'object' ? { color: color.accent } : {}
+					}
+					href={item.href}
+					as={item.as}
+					className={itemClass}
+				>
+					{item.label}
+				</Link>
+			) : (
+				<span
+					style={
+						last && typeof color === 'object' ? { color: color.accent } : {}
+					}
+					className={itemClass}
+				>
+					{item}
+				</span>
+			)}
+		</li>
+	)
 }

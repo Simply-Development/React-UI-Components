@@ -19,83 +19,83 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
 export default function SwitchInput({ label, color, onChange, checked }) {
-  const labelClass = classnames({
-    'text-sm w-full flex items-center justify-between mb-4': true,
-    'text-gray-600': !color.label
-  })
-  const dotContainerClass = classnames({
-    'w-10 h-4 rounded-full shadow-inner': true,
-    'bg-gray-400': !color.input?.background
-  })
-  const dotClass = classnames({
-    'simply_input_switch_dot absolute w-6 h-6 rounded-full shadow inset-y-0 left-0': true,
-    'bg-white': !color.input?.dot?.off
-  })
+	const labelClass = classnames({
+		'text-sm w-full flex items-center justify-between mb-4': true,
+		'text-gray-600': !color.label
+	})
+	const dotContainerClass = classnames({
+		'w-10 h-4 rounded-full shadow-inner': true,
+		'bg-gray-400': !color.input?.background
+	})
+	const dotClass = classnames({
+		'simply_input_switch_dot absolute w-6 h-6 rounded-full shadow inset-y-0 left-0': true,
+		'bg-white': !color.input?.dot?.off
+	})
 
-  return (
-    <label className={labelClass} style={color.label && { color: color.label }}>
-      {label && label}
-      <div className='relative'>
-        <input
-          type='checkbox'
-          className='hidden'
-          checked={checked}
-          onChange={onChange}
-        />
-        <div
-          className={dotContainerClass}
-          style={
-            color.input?.background && {
-              backgroundColor: checked
-                ? color.input.background.on
-                : color.input.background.off
-            }
-          }
-        />
-        <div
-          style={
-            color.input?.dot?.off && { backgroundColor: color.input.dot.off }
-          }
-          className={dotClass}
-        />
-      </div>
-      <style jsx='true'>{`
-        .simply_input_switch_dot {
-          top: -0.25rem;
-          left: -0.25rem;
-          transition: all 0.3s ease-in-out;
-        }
+	return (
+		<label className={labelClass} style={color.label && { color: color.label }}>
+			{label && label}
+			<div className='relative'>
+				<input
+					type='checkbox'
+					className='hidden'
+					checked={checked}
+					onChange={onChange}
+				/>
+				<div
+					className={dotContainerClass}
+					style={
+						color.input?.background && {
+							backgroundColor: checked
+								? color.input.background.on
+								: color.input.background.off
+						}
+					}
+				/>
+				<div
+					style={
+						color.input?.dot?.off && { backgroundColor: color.input.dot.off }
+					}
+					className={dotClass}
+				/>
+			</div>
+			<style jsx='true'>{`
+				.simply_input_switch_dot {
+					top: -0.25rem;
+					left: -0.25rem;
+					transition: all 0.3s ease-in-out;
+				}
 
-        input:checked ~ .simply_input_switch_dot {
-          transform: translateX(100%);
-          background-color: ${color.input?.dot?.on ||
-          'rgb(220, 38, 38)'} !important;
-        }
-      `}</style>
-    </label>
-  )
+				input:checked ~ .simply_input_switch_dot {
+					transform: translateX(100%);
+					background-color: ${color.input?.dot?.on ||
+					'rgb(220, 38, 38)'} !important;
+				}
+			`}</style>
+		</label>
+	)
 }
 
 SwitchInput.defaultProps = {
-  label: null,
-  color: {}
+	label: null,
+	color: {}
 }
 
 SwitchInput.propTypes = {
-  label: PropTypes.string,
-  color: PropTypes.shape({
-    label: PropTypes.string,
-    input: PropTypes.shape({
-      background: PropTypes.shape({
-        on: PropTypes.string,
-        off: PropTypes.string
-      }),
-      dot: PropTypes.shape({
-        on: PropTypes.string,
-        off: PropTypes.string
-      })
-    })
-  }),
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired
+	label: PropTypes.string,
+	color: PropTypes.shape({
+		label: PropTypes.string,
+		input: PropTypes.shape({
+			background: PropTypes.shape({
+				on: PropTypes.string,
+				off: PropTypes.string
+			}),
+			dot: PropTypes.shape({
+				on: PropTypes.string,
+				off: PropTypes.string
+			})
+		})
+	}),
+	checked: PropTypes.bool.isRequired,
+	onChange: PropTypes.func.isRequired
 }

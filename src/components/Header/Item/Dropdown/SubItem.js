@@ -17,37 +17,37 @@
 import React from 'react'
 import Link from '../../../Link'
 import classnames from 'classnames'
-import { getAccordingScrollValue } from '../../../../lib/scroll'
+import { getAccordingScrollValue } from '../../../../utils/scroll'
 
 export default function SubItemDropdownItemHeader({
-  href,
-  as,
-  onClick,
-  label,
-  color,
-  scrolled
+	href,
+	as,
+	onClick,
+	label,
+	color,
+	scrolled
 }) {
-  const subItemClass = classnames({
-    'text-base font-normal': true,
-    'text-gray-800': !color,
-    'mb-1 px-3': !href
-  })
+	const subItemClass = classnames({
+		'text-base font-normal': true,
+		'text-gray-800': !color,
+		'mb-1 px-3': !href
+	})
 
-  return (
-    <li
-      style={{
-        color: getAccordingScrollValue(color, scrolled)
-      }}
-      className={subItemClass}
-      onClick={onClick}
-    >
-      {href ? (
-        <Link href={href} as={as} className='px-3 mb-1 block'>
-          {label}
-        </Link>
-      ) : (
-        label
-      )}
-    </li>
-  )
+	return (
+		<li
+			style={{
+				color: getAccordingScrollValue(color, scrolled)
+			}}
+			className={subItemClass}
+			onClick={onClick}
+		>
+			{href ? (
+				<Link href={href} as={as} className='px-3 mb-1 block'>
+					{label}
+				</Link>
+			) : (
+				label
+			)}
+		</li>
+	)
 }
