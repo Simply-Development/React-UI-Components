@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Link from '../../../Link'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
@@ -31,6 +31,21 @@ export default function ItemDropdownItemHeader({
 	color,
 	scrolled
 }) {
+	const [colorProcessed, setColorProcessed] = useState(
+		color &&
+			(color === 'transparent' || color.initial
+				? color.onScroll || '#1F2937'
+				: color.initial || color)
+	)
+
+	useEffect(() => {
+		if (!scrolled && (color || color.initial) === 'transparent') {
+			setColorProcessed(color.onScroll || '#1F2937')
+		} else {
+			getAccordingScrollValue(color, scrolled)
+		}
+	}, [scrolled])
+
 	const itemClass = classnames({
 		'text-gray-800': !color,
 		'font-bold text-sm': title,
@@ -47,9 +62,11 @@ export default function ItemDropdownItemHeader({
 	return (
 		<Fragment>
 			<li
-				style={{
-					color: getAccordingScrollValue(color, scrolled)
-				}}
+				style={
+					colorProcessed && {
+						color: colorProcessed
+					}
+				}
 				onClick={onClick}
 				className={itemClass}
 			>
@@ -64,7 +81,12 @@ export default function ItemDropdownItemHeader({
 			{items &&
 				items.length > 0 &&
 				items.map((item, index) => (
-					<SubItem key={index} {...item} color={color} scrolled={scrolled} />
+					<SubItem
+						key={index}
+						{...item}
+						color={colorProcessed}
+						scrolled={scrolled}
+					/>
 				))}
 		</Fragment>
 	)

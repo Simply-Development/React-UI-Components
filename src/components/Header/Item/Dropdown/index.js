@@ -19,7 +19,6 @@ import classnames from 'classnames'
 import Item from './Item'
 import PropTypes from 'prop-types'
 import { getAccordingScrollValue } from '../../../../utils/scroll'
-import { baseColorIfTransparent } from '../../../../utils/color'
 
 /**
  * Dropdown items inside Header Item
@@ -35,7 +34,7 @@ export default function DropdownItemHeader({
 	color
 }) {
 	const listClass = classnames({
-		'rounded shadow': true,
+		'rounded-b shadow': true,
 		'bg-white': !background
 	})
 
@@ -46,16 +45,22 @@ export default function DropdownItemHeader({
 					style={
 						background && {
 							backgroundColor:
-								background &&
-								baseColorIfTransparent(
-									getAccordingScrollValue(background, scrolled)
-								)
+								!scrolled &&
+								(background.initial || background) === 'transparent'
+									? background.onScroll || 'white'
+									: getAccordingScrollValue(background, scrolled)
 						}
 					}
 					className={listClass}
 				>
 					{items.map((item, index) => (
-						<Item key={index} {...item} color={color} scrolled={scrolled} />
+						<Item
+							{...item}
+							key={index}
+							color={color}
+							scrolled={scrolled}
+							containerIsTransparent
+						/>
 					))}
 				</ol>
 				<style jsx='true'>{`
