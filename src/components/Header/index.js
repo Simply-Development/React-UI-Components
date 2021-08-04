@@ -205,11 +205,15 @@ export default function Header({
 								/>
 								{cartCount > 0 && (
 									<NotificationBadge
-										count={cartCount}
+										count={cartCount < 10 ? cartCount : '+9'}
 										containerStyle={{
-											position: 'absolute',
-											top: '-3px',
-											right: '-6px'
+											position: 'absolute'
+										}}
+										style={{
+											padding: '5px',
+											fontSize: '10px',
+											top: '8px',
+											right: '-9px'
 										}}
 									/>
 								)}
@@ -225,11 +229,15 @@ export default function Header({
 								/>
 								{cartCount > 0 && (
 									<NotificationBadge
-										count={cartCount}
+										count={cartCount < 10 ? cartCount : '+9'}
 										containerStyle={{
-											position: 'absolute',
-											top: '-3px',
-											right: '-6px'
+											position: 'absolute'
+										}}
+										style={{
+											padding: '4px',
+											fontSize: '10px',
+											top: '8px',
+											right: '-9px'
 										}}
 									/>
 								)}
