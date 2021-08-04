@@ -108,10 +108,11 @@ export default function Header({
 	})
 	const cartContainerClass = classNames({
 		relative: true,
-		flex: typeof withCart !== 'object' || withCart.showOn === undefined,
+		'flex justify-end items-center h-full':
+			typeof withCart !== 'object' || withCart.showOn === undefined,
 		'md:hidden':
 			typeof withCart === 'object' && withCart.showOn === 'onlySmall',
-		'hidden md:flex':
+		'hidden md:flex md:justify-end md:items-center':
 			typeof withCart === 'object' && withCart.showOn === 'onlyBig'
 	})
 
@@ -127,9 +128,9 @@ export default function Header({
 						: scrolled && shadow.value
 			}}
 		>
-			<div className='col-start-2 col-span-10'>
+			<div className='col-start-2 col-span-10 relative'>
 				<div className='grid items-center grid-cols-12'>
-					<div className='col-start-1 col-span-12 md:col-start-1 md:col-span-5 lg:col-start-1 lg:col-span-4 xl:col-start-1 xl:col-span-3 text-center md:text-left'>
+					<div className='col-span-12 md:col-span-5 lg:col-span-4 xl:col-span-3 text-center md:text-left'>
 						{typeof title === 'function' ? (
 							title({ scrolled })
 						) : (
@@ -167,69 +168,6 @@ export default function Header({
 									}
 								/>
 							))}
-							{typeof withCart === 'boolean' && withCart ? (
-								<div className={cartContainerClass}>
-									<FiShoppingCart
-										size='1.5em'
-										color={
-											color &&
-											getAccordingScrollValue(color.item || color, scrolled)
-										}
-									/>
-									{cartCount > 0 && (
-										<NotificationBadge
-											count={cartCount}
-											containerStyle={{
-												position: 'absolute',
-												top: '-3px',
-												right: '-6px'
-											}}
-										/>
-									)}
-								</div>
-							) : typeof withCart === 'string' ? (
-								<Link href={withCart} className={cartContainerClass}>
-									<FiShoppingCart
-										size='1.5em'
-										color={
-											color &&
-											getAccordingScrollValue(color.item || color, scrolled)
-										}
-									/>
-									{cartCount > 0 && (
-										<NotificationBadge
-											count={cartCount}
-											containerStyle={{
-												position: 'absolute',
-												top: '-3px',
-												right: '-6px'
-											}}
-										/>
-									)}
-								</Link>
-							) : (
-								typeof withCart === 'object' && (
-									<Link href={withCart.href} className={cartContainerClass}>
-										<FiShoppingCart
-											size='1.5em'
-											color={
-												color &&
-												getAccordingScrollValue(color.item || color, scrolled)
-											}
-										/>
-										{cartCount > 0 && (
-											<NotificationBadge
-												count={cartCount}
-												containerStyle={{
-													position: 'absolute',
-													top: '-3px',
-													right: '-6px'
-												}}
-											/>
-										)}
-									</Link>
-								)
-							)}
 							{sidebarButton &&
 								(typeof sidebarButton === 'function' ? (
 									sidebarButton({ isSidebarOpen, setIsSidebarOpen, scrolled })
@@ -254,6 +192,71 @@ export default function Header({
 									/>
 								))}
 						</div>
+					</div>
+					<div className='col-end-13 absolute right-0 h-full'>
+						{typeof withCart === 'boolean' && withCart ? (
+							<div className={cartContainerClass}>
+								<FiShoppingCart
+									size='1.5em'
+									color={
+										color &&
+										getAccordingScrollValue(color.item || color, scrolled)
+									}
+								/>
+								{cartCount > 0 && (
+									<NotificationBadge
+										count={cartCount}
+										containerStyle={{
+											position: 'absolute',
+											top: '-3px',
+											right: '-6px'
+										}}
+									/>
+								)}
+							</div>
+						) : typeof withCart === 'string' ? (
+							<Link href={withCart} className={cartContainerClass}>
+								<FiShoppingCart
+									size='1.5em'
+									color={
+										color &&
+										getAccordingScrollValue(color.item || color, scrolled)
+									}
+								/>
+								{cartCount > 0 && (
+									<NotificationBadge
+										count={cartCount}
+										containerStyle={{
+											position: 'absolute',
+											top: '-3px',
+											right: '-6px'
+										}}
+									/>
+								)}
+							</Link>
+						) : (
+							typeof withCart === 'object' && (
+								<Link href={withCart.href} className={cartContainerClass}>
+									<FiShoppingCart
+										size='1.5em'
+										color={
+											color &&
+											getAccordingScrollValue(color.item || color, scrolled)
+										}
+									/>
+									{cartCount > 0 && (
+										<NotificationBadge
+											count={cartCount}
+											containerStyle={{
+												position: 'absolute',
+												top: '-3px',
+												right: '-6px'
+											}}
+										/>
+									)}
+								</Link>
+							)
+						)}
 					</div>
 				</div>
 			</div>
